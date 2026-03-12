@@ -18,14 +18,14 @@ export default function Page() {
   const projects = [
     {
       name: "TimeBank",
-      focus: "Full-Stack CRUD & Credit Logic",
+      focus: "Full-Stack & Credit Logic",
   
       desc: "A community-driven skill-swap platform architected with a robust credit transfer system.",
       url: "https://github.com/PallaviPattanashetti/TimeBank",
     },
     {
       name: "Pokémon Hub",
-      focus: "API Logic & State Management",
+      focus: "API Logic",
     
       desc: "A high-speed data hub focused on complex state management and seamless API integration.",
       url: "https://pokemangame-h79c-git-main-pallavipattanashettis-projects.vercel.app",
@@ -125,7 +125,7 @@ export default function Page() {
 
       
         <div className="mb-24">
-          <h2 className="mb-10 text-3xl font-black">Featured Projects</h2>
+          <h2 className="mb-10 text-3xl font-black">Now and Next Projects</h2>
           <div className="space-y-4">
             {projects.map((project) => (
               <a
@@ -141,9 +141,7 @@ export default function Page() {
                       {project.name}
                     </h3>
                     <p className="mt-1 text-slate-600">{project.desc}</p>
-                    <span className="mt-3 inline-block rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">
-                      {project.tech}
-                    </span>
+                   
                   </div>
                   <div className="md:text-right">
                     <p className="text-xs font-bold tracking-widest text-slate-400 uppercase">Focus</p>
@@ -196,7 +194,7 @@ export default function Page() {
               </div>
               <div>
                 <p className="text-xs font-bold tracking-widest text-slate-400 uppercase">Phone</p>
-                <p className="text-lg font-semibold text-slate-900">650-867-5260</p>
+                <p className="text-lg font-semibold text-slate-900">650-868-5268</p>
               </div>
             </div>
 
