@@ -19,21 +19,21 @@ export default function Page() {
     {
       name: "TimeBank",
       focus: "Full-Stack CRUD & Credit Logic",
-      tech: "Next.js / C#",
+  
       desc: "A community-driven skill-swap platform architected with a robust credit transfer system.",
       url: "https://github.com/PallaviPattanashetti/TimeBank",
     },
     {
       name: "Pokémon Hub",
       focus: "API Logic & State Management",
-      tech: "React / Tailwind",
+    
       desc: "A high-speed data hub focused on complex state management and seamless API integration.",
-      url: "https://github.com/PallaviPattanashetti",
+      url: "https://pokemangame-h79c-git-main-pallavipattanashettis-projects.vercel.app",
     },
     {
       name: "Influence Site",
       focus: "Content Architecture & UI",
-      tech: "HTML5 / SASS",
+    
       desc: "A deep dive into structural hierarchy and clean, responsive interface design.",
       url: "https://influentialperson-git-main-pallavipattanashettis-projects.vercel.app/",
     },
@@ -68,6 +68,7 @@ export default function Page() {
             </a>
           </div>
         </header>
+
 
  <div className="mb-24 grid gap-8 md:grid-cols-2">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
