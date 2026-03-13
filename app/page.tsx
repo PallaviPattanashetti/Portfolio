@@ -71,35 +71,35 @@ export default function Page() {
             <h2 className="mb-4 text-2xl font-bold">The Journey</h2>
             <div className="space-y-4 text-slate-700">
               
-              "My professional journey is defined by two deep dives: first as an
+              My professional journey is defined by two deep dives: first as an
               <strong>Educator</strong>, where I mastered the art of breaking down complex
               concepts, and second as a <strong>Full-Stack Developer</strong>, where I now build
               the digital systems that handle that complexity. This transition
               has forged my core philosophy of<strong>Functional Transparency</strong> —the
               belief that code, much like a lesson plan, should be clean,
-              logical, and inherently easy to navigate. I don't just build
+              logical, and inherently easy to navigate. I do not just build
               applications; I architect clear pathways between sophisticated
               backend logic and intuitive frontend interfaces. My goal is to
               ensure that the technology I create empowers the user by removing
               friction, making the most advanced tools feel simple and
-              accessible."
+              accessible.
             </div>
           </div>
 
           <div className="rounded-3xl bg-blue-600 p-8 text-white shadow-sm">
             <h2 className="mb-4 text-2xl font-bold">Core Philosophy</h2>
             
-            "Transitioning from a <strong>career in Teaching to Full-Stack Development</strong>
+            Transitioning from a <strong>career in Teaching to Full-Stack Development</strong>
             has given me a unique perspective on the digital lifecycle: I have
             dived deep into both the human psychology of learning and the
             technical rigor of software engineering. My core philosophy is
             rooted in <strong>Structural Empathy</strong>, which means I write every line of
-            backend code with the end-user's 'aha!' moment in mind. By bridging
+            backend code with the end-users aha! moment in mind. By bridging
             the gap between robust database management and responsive UI design,
             I ensure that my applications are not only technically sound but
             also educationally intuitive. I believe that the best software
-            doesn't just perform a task; it teaches the user how to succeed
-            through a seamless and supportive digital experience."
+            does not just perform a task; it teaches the user how to succeed
+            through a seamless and supportive digital experience.
           </div>
         </div>
 
@@ -172,7 +172,7 @@ export default function Page() {
         </div>
 
         <div className="mb-24">
-          <h2 className="mb-10 text-3xl font-black">Let's Connect</h2>
+          <h2 className="mb-10 text-3xl font-black">Connect Me</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <a
               href="mailto:Pallavi.Pattanashetti@gmail.com"
