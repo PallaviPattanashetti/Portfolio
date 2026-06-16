@@ -12,7 +12,7 @@ export default function Page() {
       name: "TimeBank",
       role: "Project Lead",
       desc: "A community platform where people trade skills and time instead of money. I led the team from concept to launch, owning the architecture.",
-      url: "https://github.com/PallaviPattanashetti/TimeBank",
+      url: "https://newfrontend-lemon.vercel.app",
     },
 
     {
