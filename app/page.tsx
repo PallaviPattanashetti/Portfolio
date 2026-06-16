@@ -1,333 +1,747 @@
-"use client";
-
 import React from "react";
 
 export default function Page() {
-  const skills = [
-    "C#",
-    ".NET Core",
-    "Next.js",
-    "TypeScript",
-    "SQL",
-    "Tailwind CSS",
-    "Figma",
-    "GitHub",
-  ];
-
   const projects = [
     {
-      name: "TimeBank",
-      focus: "view my project",
-
-      desc: "A community-driven skill-swap platform architected with a robust credit transfer system.",
-      url: "https://github.com/PallaviPattanashetti/TimeBank",
+      name: "Aadhya Community Site",
+     role: "Community Project",
+      desc: "A site built around local community work and volunteering. Warm, accessible, and made to connect people.",
+      url: "https://aadhya-website.vercel.app",
     },
     {
-      name: "Pokémon Hub",
-      focus: "view my project",
+      name: "TimeBank",
+      role: "Project Lead",
+      desc: "A community platform where people trade skills and time instead of money. I led the team from concept to launch, owning the architecture.",
+      url: "https://github.com/PallaviPattanashetti/TimeBank",
+    },
 
-      desc: "A high-speed data hub focused on complex state management and seamless API integration.",
+    {
+      name: "Pokémon Hub",
+      role: "UI Design and Build",
+      desc: "A fast, data-rich app built around complex state management and live API integration. Every interaction had to feel instant and reliable.",
       url: "https://pokemangame-h79c-git-main-pallavipattanashettis-projects.vercel.app",
     },
     {
       name: "Influence Site",
-      focus: "view my project",
-
-      desc: "A deep dive into structural hierarchy and clean, responsive interface design.",
+      role: "UI Design and Build",
+      desc: "A clean, responsive site focused on hierarchy and readability. The goal was to let the content breathe while keeping the structure sharp.",
       url: "https://influentialperson-git-main-pallavipattanashettis-projects.vercel.app/",
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans text-slate-900">
-      <main className="mx-auto max-w-5xl px-6 pt-20">
-        <header className="mb-20">
-          <p className="mb-2 text-xl font-bold text-slate-500">
-            Pallavi Pattanashetti
-          </p>
-          <h1 className="mb-6 text-5xl leading-tight font-black md:text-6xl">
-            Software Engineer <br />
-            <span className="text-blue-600">& Former Educator</span>
-          </h1>
+  const stack = [
+    { category: "Languages", items: "TypeScript, JavaScript, C#, HTML5, CSS3" },
+    {
+      category: "Frontend",
+      items: "React, Next.js, Angular, Tailwind CSS, Bootstrap",
+    },
+    { category: "Backend", items: "ASP.NET Core, Web API, Node.js, REST APIs" },
+    { category: "Data and Cloud", items: "SQL, Microsoft Azure, Vercel" },
+    {
+      category: "Design",
+      items: "Figma, Google Stitch, Responsive Web Design",
+    },
+    {
+      category: "Dev Tools",
+      items: "GitHub, Postman, Swagger, VS Code, Visual Studio",
+    },
+  ];
 
-          <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-            <p className="max-w-2xl border-l-4 border-blue-600 pl-6 text-lg text-slate-600 italic">
-              My background in teaching gave me a unique lens for logic: I do
-              not just write code; I architect systems that are clear,
-              organized, and purposeful.
-            </p>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              className="rounded-xl bg-slate-900 px-8 py-4 font-bold text-white shadow-lg transition-colors hover:bg-blue-600"
-            >
-              View Resume
+  const certifications = [
+    "Claude 101 (Anthropic, Apr 2026)",
+    "AI Fluency for Educators (Anthropic, Apr 2026)",
+    "AI Fluency: Framework and Foundations (Anthropic, Apr 2026)",
+  ];
+
+  return (
+    <div
+      style={{
+        fontFamily: "'Inter', sans-serif",
+        background: "#FAFAF8",
+        color: "#1A1A1A",
+        minHeight: "100vh",
+      }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+        * { box-sizing: border-box; }
+        .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #666; transition: color 0.2s; }
+        .nav-link:hover { color: #2563EB; }
+        .btn { display: inline-block; background: #1A1A1A; color: white; padding: 13px 26px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s; text-decoration: none; }
+        .btn:hover { background: #2563EB; }
+        .proj-card { display: block; text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 28px 30px; transition: border-color 0.2s, box-shadow 0.2s; }
+        .proj-card:hover { border-color: #2563EB; box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
+        .proj-card:hover .proj-name { color: #2563EB; }
+        .proj-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; transition: color 0.2s; }
+        .card-hover { background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 30px; transition: border-color 0.2s; }
+        .card-hover:hover { border-color: #2563EB; }
+        .contact-card { display: block; text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 24px 28px; transition: border-color 0.2s; }
+        .contact-card:hover { border-color: #2563EB; }
+        .stack-row { display: flex; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #F0EEE9; }
+        .stack-row:last-child { border-bottom: none; }
+        @media (max-width: 640px) {
+          .stack-row { flex-direction: column; gap: 4px; }
+        }
+      `}</style>
+
+      {/* Nav */}
+      <nav
+        style={{
+          borderBottom: "1px solid #E8E5DF",
+          background: "#FAFAF8",
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          padding: "0 24px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 900,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 56,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 900,
+              fontSize: "1rem",
+            }}
+          >
+            Pallavi<span style={{ color: "#2563EB" }}>.</span>
+          </p>
+          <div style={{ display: "flex", gap: 28 }}>
+            <a href="#work" className="nav-link">
+              Work
+            </a>
+            <a href="#stack" className="nav-link">
+              Stack
+            </a>
+            <a href="#contact" className="nav-link">
+              Contact
             </a>
           </div>
-        </header>
+        </div>
+      </nav>
 
-        <div className="mb-24 grid gap-8 md:grid-cols-2">
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-            <h2 className="mb-4 text-2xl font-bold">The Journey</h2>
-            <div className="space-y-4 text-slate-700">
+      <main style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
+        {/* Hero */}
+        <section style={{ paddingTop: 72, paddingBottom: 64 }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              background: "#F0EEE9",
+              border: "1px solid #E0DDD6",
+              padding: "7px 16px",
+              borderRadius: 4,
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase" as const,
+              color: "#666",
+              marginBottom: 24,
+            }}
+          >
+            <span style={{ color: "#2563EB" }}>Teacher</span>
+            <span style={{ color: "#BBB" }}>turned</span>
+            <span style={{ color: "#2563EB" }}>Engineer</span>
+          </div>
+          <h1
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(2.6rem, 7vw, 5rem)",
+              fontWeight: 900,
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+              marginBottom: 24,
+            }}
+          >
+            Pallavi
+            <br />
+            Pattanashetti
+          </h1>
+          <p
+            style={{
+              fontSize: "1.02rem",
+              color: "#555",
+              lineHeight: 1.75,
+              maxWidth: 560,
+              marginBottom: 36,
+            }}
+          >
+            Full stack software engineer and CodeStack Academy graduate. I spent
+            years as a teacher learning how to make hard things feel simple. Now
+            I build software with that same instinct: clean logic, clear
+            interfaces, nothing wasted.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: 20,
+              alignItems: "center",
+              flexWrap: "wrap" as const,
+            }}
+          >
+            <a href="/resume.pdf" target="_blank" className="btn">
+              View Resume
+            </a>
+            <a
+              href="https://newfrontend-lemon.vercel.app"
+              target="_blank"
+              style={{
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                color: "#2563EB",
+                textDecoration: "none",
+              }}
+            >
               
-              My professional journey is defined by two deep dives: first as an
-              <strong>Educator</strong>, where I mastered the art of breaking down complex
-              concepts, and second as a <strong>Full-Stack Developer</strong>, where I now build
-              the digital systems that handle that complexity. This transition
-              has forged my core philosophy of<strong>Functional Transparency</strong> —the
-              belief that code, much like a lesson plan, should be clean,
-              logical, and inherently easy to navigate. I do not just build
-              applications; I architect clear pathways between sophisticated
-              backend logic and intuitive frontend interfaces. My goal is to
-              ensure that the technology I create empowers the user by removing
-              friction, making the most advanced tools feel simple and
-              accessible.
-            </div>
+            </a>
           </div>
+        </section>
 
-          <div className="rounded-3xl bg-blue-600 p-8 text-white shadow-sm">
-            <h2 className="mb-4 text-2xl font-bold">Core Philosophy</h2>
-            
-            Transitioning from a <strong>career in Teaching to Full-Stack Development</strong>
-            has given me a unique perspective on the digital lifecycle: I have
-            dived deep into both the human psychology of learning and the
-            technical rigor of software engineering. My core philosophy is
-            rooted in <strong>Structural Empathy</strong>, which means I write every line of
-            backend code with the end-users aha! moment in mind. By bridging
-            the gap between robust database management and responsive UI design,
-            I ensure that my applications are not only technically sound but
-            also educationally intuitive. I believe that the best software
-            does not just perform a task; it teaches the user how to succeed
-            through a seamless and supportive digital experience.
+        {/* About */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 20,
+            marginBottom: 72,
+          }}
+        >
+          <div className="card-hover">
+            <span
+              style={{
+                display: "inline-block",
+                background: "#1A1A1A",
+                color: "white",
+                fontSize: "0.68rem",
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase" as const,
+                padding: "4px 10px",
+                borderRadius: 2,
+                marginBottom: 18,
+              }}
+            >
+              The Story
+            </span>
+            <p style={{ fontSize: "0.92rem", color: "#444", lineHeight: 1.78 }}>
+              I graduated from CodeStack Academy&apos;s 1,000 hour program in June
+              2026. Before that, I spent years teaching across different
+              subjects and age groups. That background trained me to think
+              structurally, communicate clearly, and find the simplest path
+              through a complex problem. I bring that to every codebase I touch.
+            </p>
+          </div>
+          <div
+            style={{
+              background: "#2563EB",
+              border: "1px solid #2563EB",
+              borderRadius: 12,
+              padding: 30,
+            }}
+          >
+            <span
+              style={{
+                display: "inline-block",
+                background: "rgba(255,255,255,0.2)",
+                color: "white",
+                fontSize: "0.68rem",
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase" as const,
+                padding: "4px 10px",
+                borderRadius: 2,
+                marginBottom: 18,
+              }}
+            >
+              Philosophy
+            </span>
+            <p
+              style={{
+                fontSize: "0.92rem",
+                color: "rgba(255,255,255,0.9)",
+                lineHeight: 1.78,
+              }}
+            >
+              I call it{" "}
+              <strong style={{ color: "white" }}>
+                Functional Transparency
+              </strong>
+              . The best software, like the best lesson, removes friction
+              instead of adding flair. I build things that are technically solid
+              and immediately understandable. If a user has to guess what
+              something does, the design has already failed.
+            </p>
           </div>
         </div>
 
-        <div className="mb-24">
-          <h2 className="mb-10 text-center text-3xl font-black">
-            Technical Stack
-          </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="mb-2 font-bold text-blue-600">Languages</h3>
-              <p className="text-sm text-slate-600">
-                C#, TypeScript, JavaScript, HTML, CSS
-              </p>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="mb-2 font-bold text-blue-600">Front-End</h3>
-              <p className="text-sm text-slate-600">
-                Next.js, React, Tailwind CSS
-              </p>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="mb-2 font-bold text-blue-600">Back-End</h3>
-              <p className="text-sm text-slate-600">
-                ASP.NET Core, Web API, Node.js
-              </p>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="mb-2 font-bold text-blue-600">Design & Tools</h3>
-              <p className="text-sm text-slate-600">
-                Figma, Git, GitHub, Postman
-              </p>
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h3 className="mb-2 font-bold text-blue-600">Deployment</h3>
-              <p className="text-sm text-slate-600">Vercel, Azure</p>
-            </div>
+        {/* Projects */}
+        <section id="work" style={{ marginBottom: 72 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              marginBottom: 32,
+              flexWrap: "wrap" as const,
+              gap: 12,
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+                fontWeight: 900,
+              }}
+            >
+              Projects
+            </h2>
+            <a
+              href="https://github.com/PallaviPattanashetti"
+              target="_blank"
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase" as const,
+                color: "#2563EB",
+                textDecoration: "none",
+              }}
+            >
+              All on GitHub
+            </a>
           </div>
-        </div>
-
-        <div className="mb-24">
-          <h2 className="mb-10 text-3xl font-black">Now and Next Projects</h2>
-          <div className="space-y-4">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column" as const,
+              gap: 14,
+            }}
+          >
             {projects.map((project) => (
               <a
                 key={project.name}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:border-blue-500"
+                className="proj-card"
               >
-                <div className="flex flex-col justify-between gap-4 md:flex-row">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: 20,
+                    flexWrap: "wrap" as const,
+                  }}
+                >
                   <div>
-                    <h3 className="text-xl font-bold transition-colors group-hover:text-blue-600">
-                      {project.name}
-                    </h3>
-                    <p className="mt-1 text-slate-600">{project.desc}</p>
-                  </div>
-                  <div className="md:text-right">
-                    <p className="text-xs font-bold tracking-widest text-slate-400 uppercase">
-                      Focus
+                    <p className="proj-name">{project.name}</p>
+                    <p
+                      style={{
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase" as const,
+                        color: "#999",
+                        marginBottom: 10,
+                      }}
+                    >
+                      {project.role}
                     </p>
-                    <p className="font-medium text-slate-800">
-                      {project.focus}
+                    <p
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#555",
+                        lineHeight: 1.68,
+                        maxWidth: 520,
+                      }}
+                    >
+                      {project.desc}
                     </p>
                   </div>
+                  <p
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "1.3rem",
+                      fontWeight: 900,
+                      color: "#E8E5DF",
+                      flexShrink: 0,
+                    }}
+                  >
+                    
+                  </p>
                 </div>
               </a>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="mb-24">
-          <h2 className="mb-10 text-3xl font-black">Connect Me</h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Stack */}
+        <section id="stack" style={{ marginBottom: 72 }}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+              fontWeight: 900,
+              marginBottom: 32,
+            }}
+          >
+            Technical Stack
+          </h2>
+          <div
+            style={{
+              background: "white",
+              border: "1px solid #E8E5DF",
+              borderRadius: 12,
+              padding: "8px 28px",
+            }}
+          >
+            {stack.map((row) => (
+              <div key={row.category} className="stack-row">
+                <span
+                  style={{
+                    fontSize: "0.7rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase" as const,
+                    color: "#2563EB",
+                    minWidth: 140,
+                    flexShrink: 0,
+                  }}
+                >
+                  {row.category}
+                </span>
+                <span
+                  style={{ fontSize: "0.9rem", color: "#444", lineHeight: 1.5 }}
+                >
+                  {row.items}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" style={{ marginBottom: 72 }}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+              fontWeight: 900,
+              marginBottom: 32,
+            }}
+          >
+            Get In Touch
+          </h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: 14,
+            }}
+          >
             <a
               href="mailto:Pallavi.Pattanashetti@gmail.com"
-              className="flex items-center gap-6 rounded-3xl border border-slate-200 bg-white p-8 transition-shadow hover:shadow-md"
+              className="contact-card"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase">
-                  Email
-                </p>
-                <p className="text-lg font-semibold">
-                  Pallavi.Pattanashetti@gmail.com
-                </p>
-              </div>
+              <p
+                style={{
+                  fontSize: "0.66rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                  color: "#999",
+                  marginBottom: 4,
+                }}
+              >
+                Email
+              </p>
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  wordBreak: "break-all" as const,
+                }}
+              >
+                Pallavi.Pattanashetti@gmail.com
+              </p>
             </a>
-
             <a
-              href="https://linkedin.com/in/PallaviPattanashetti"
+              href="https://linkedin.com/in/pallavipraveen"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-6 rounded-3xl border border-slate-200 bg-white p-8 transition-shadow hover:shadow-md"
+              className="contact-card"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white">
-                in
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase">
-                  LinkedIn
-                </p>
-                <p className="text-lg font-semibold">View Profile</p>
-              </div>
+              <p
+                style={{
+                  fontSize: "0.66rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                  color: "#999",
+                  marginBottom: 4,
+                }}
+              >
+                LinkedIn
+              </p>
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  wordBreak: "break-all" as const,
+                }}
+              >
+                linkedin.com/in/pallavipraveen
+              </p>
             </a>
-
-            <div className="flex items-center gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-bold tracking-widest text-slate-400 uppercase">
-                  Phone
-                </p>
-                <p className="text-lg font-semibold text-slate-900">
-                  650-868-5268
-                </p>
-              </div>
-            </div>
-
             <a
               href="https://github.com/PallaviPattanashetti"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-6 rounded-3xl border border-slate-200 bg-white p-8 transition-shadow hover:shadow-md"
+              className="contact-card"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white">
-                <svg
-                  className="h-7 w-7"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-bold tracking-widest text-slate-400 uppercase">
-                  GitHub
-                </p>
-                <p className="text-lg font-semibold text-slate-900">
-                  View Projects
-                </p>
-              </div>
+              <p
+                style={{
+                  fontSize: "0.66rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                  color: "#999",
+                  marginBottom: 4,
+                }}
+              >
+                GitHub
+              </p>
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  wordBreak: "break-all" as const,
+                }}
+              >
+                PallaviPattanashetti
+              </p>
+            </a>
+            <a
+              href="tel:6508685268"
+              className="contact-card"
+            >
+              <p
+                style={{
+                  fontSize: "0.66rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                  color: "#999",
+                  marginBottom: 4,
+                }}
+              >
+                Phone
+              </p>
+              <p
+                style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  wordBreak: "break-all" as const,
+                }}
+              >
+                650 868 5268
+              </p>
             </a>
           </div>
-        </div>
+        </section>
 
-        <div className="rounded-3xl bg-slate-900 p-10 text-white">
-          <div className="flex flex-col justify-between gap-10 md:flex-row">
+        {/* Education and Community */}
+        <div
+          style={{
+            background: "#1A1A1A",
+            color: "white",
+            borderRadius: 14,
+            padding: 44,
+            marginBottom: 72,
+          }}
+        >
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 40,
+            }}
+          >
             <div>
-              <h2 className="mb-6 text-2xl font-bold">Education & Training</h2>
-              <div className="space-y-4">
-                <div>
-                  <p className="font-bold text-blue-400">
-                    Software Engineering Fellowship
-                  </p>
-                  <p className="text-sm text-slate-400">Code Stack Academy</p>
-                </div>
-                <div>
-                  <p className="font-bold text-blue-400">
-                    Master of Arts in English Literature
-                  </p>
-                  <p className="text-sm text-slate-400">
-                    Professional background in structured analysis.
-                  </p>
-                </div>
+              <p
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "1.3rem",
+                  fontWeight: 900,
+                  marginBottom: 24,
+                  color: "white",
+                }}
+              >
+                Education
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column" as const,
+                  gap: 18,
+                }}
+              >
+                {[
+                  {
+                    label: "Software Engineering",
+                    name: "CodeStack Academy, Graduating June 2026",
+                  },
+                  {
+                    label: "Bachelor of Education",
+                    name: "KLE University, Karnataka, India",
+                  },
+                  {
+                    label: "MA, English Literature",
+                    name: "Kuvempu University, Karnataka, India",
+                  },
+                ].map((edu) => (
+                  <div key={edu.label}>
+                    <p
+                      style={{
+                        fontSize: "0.68rem",
+                        fontWeight: 700,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase" as const,
+                        color: "#2563EB",
+                        marginBottom: 3,
+                      }}
+                    >
+                      {edu.label}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "0.92rem",
+                        color: "rgba(255,255,255,0.85)",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {edu.name}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="flex h-fit flex-wrap gap-2">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-lg bg-white/10 px-3 py-1 text-xs"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div>
+              <p
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "1.3rem",
+                  fontWeight: 900,
+                  marginBottom: 16,
+                  color: "white",
+                }}
+              >
+                Certifications
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap" as const,
+                  gap: 6,
+                  marginBottom: 28,
+                }}
+              >
+                {certifications.map((cert) => (
+                  <span
+                    key={cert}
+                    style={{
+                      display: "inline-block",
+                      background: "rgba(255,255,255,0.1)",
+                      color: "rgba(255,255,255,0.85)",
+                      fontSize: "0.75rem",
+                      padding: "5px 12px",
+                      borderRadius: 4,
+                    }}
+                  >
+                    {cert}
+                  </span>
+                ))}
+              </div>
+              <p
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "1.3rem",
+                  fontWeight: 900,
+                  marginBottom: 14,
+                  color: "white",
+                }}
+              >
+                Community
+              </p>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  color: "rgba(255,255,255,0.65)",
+                  lineHeight: 1.72,
+                }}
+              >
+                TEDxManteca Event Representative, former Scout Den Leader, and
+                community volunteer. I show up the same way in the community as
+                I do at my desk.
+              </p>
             </div>
           </div>
         </div>
-
-        <footer className="mt-12 border-t border-slate-200 bg-white py-12">
-          <div className="mx-auto max-w-5xl">
-            <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-              <div className="text-center md:text-left">
-                <p className="text-lg font-black tracking-tighter">
-                  PALLAVI <span className="text-blue-600">PATTANASHETTI</span>
-                </p>
-                <p className="text-sm font-medium text-slate-500">
-                  Software Engineer | educator at heart.
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="hidden h-px w-8 bg-slate-300 md:block"></div>
-                <p className="text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase">
-                  &copy; {new Date().getFullYear()}
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
       </main>
+
+      {/* Footer */}
+      <footer
+        style={{
+          borderTop: "1px solid #E8E5DF",
+          padding: "28px 24px",
+          background: "#FAFAF8",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 900,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap" as const,
+            gap: 10,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 900,
+              fontSize: "0.95rem",
+            }}
+          >
+            Pallavi <span style={{ color: "#2563EB" }}>Pattanashetti</span>
+          </p>
+          <p style={{ fontSize: "0.75rem", color: "#AAA", fontWeight: 500 }}>
+            Manteca, CA
+          </p>
+          <p
+            style={{
+              fontSize: "0.68rem",
+              color: "#CCC",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase" as const,
+            }}
+          >
+            {new Date().getFullYear()}
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
