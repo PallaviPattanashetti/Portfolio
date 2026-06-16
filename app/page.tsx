@@ -188,7 +188,7 @@ export default function Page() {
               flexWrap: "wrap" as const,
             }}
           >
-            <a href="/resume.pdf" target="_blank" className="btn">
+            <a href="https://docs.google.com/document/d/1Hb3IMTS5r23AP6nOIUG8NOGrOcO1eks5UCCGXaws6_Q/edit?usp=sharing" target="_blank" className="btn">
               View Resume
             </a>
             <a
