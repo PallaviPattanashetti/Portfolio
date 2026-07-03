@@ -3,15 +3,21 @@ import React from "react";
 export default function Page() {
   const projects = [
     {
-      name: "Aadhya Community Site",
-     role: "Community Project",
-      desc: "A site built around local community work and volunteering. Warm, accessible, and made to connect people.",
-      url: "https://aadhya-website.vercel.app",
+      name: "ActBridge",
+      role: "Founder, Design and Build",
+      desc: "My own idea, brought to life with Claude. A community platform that connects volunteers with opportunities, and helps high school and college students find meaningful ways to give back and build experience.",
+      url: "https://actbridge.pavil.co/dashboard",
+    },
+    {
+      name: "Aadya Together",
+      role: "Design, Build and Deploy",
+      desc: "A community website I built from scratch, handling the design, development, and deployment on my own. It powers Aadya, a Manteca-based initiative celebrating Indian culture through festivals and charitable work. Built with Next.js and PostgreSQL, it is warm, accessible, and made to connect a community.",
+      url: "https://www.aadyatogether.org/",
     },
     {
       name: "TimeBank",
       role: "Project Lead",
-      desc: "A community platform where people trade skills and time instead of money. I led the team from concept to launch, owning the architecture.",
+      desc: "My full stack capstone project at CodeStack Academy, a community platform where people trade skills and time instead of money. As project lead of a four-person team, I drove most of the frontend build and worked closely with my teammates to plan what to build and how to approach it, guiding the project from concept to launch.",
       url: "https://newfrontend-lemon.vercel.app",
     },
 
@@ -30,20 +36,44 @@ export default function Page() {
   ];
 
   const stack = [
-    { category: "Languages", items: "TypeScript, JavaScript, C#, HTML5, CSS3" },
+    { category: "Languages", items: "C#, TypeScript, JavaScript, HTML5, CSS3, SQL" },
     {
-      category: "Frontend",
-      items: "React, Next.js, Angular, Tailwind CSS, Bootstrap",
+      category: "Frameworks",
+      items: "React, Next.js, .NET, Tailwind CSS, Bootstrap",
     },
     { category: "Backend", items: "ASP.NET Core, Web API, Node.js, REST APIs" },
-    { category: "Data and Cloud", items: "SQL, Microsoft Azure, Vercel" },
+    {
+      category: "Cloud and Data",
+      items: "Microsoft Azure, SQL Server, Vercel, Railway",
+    },
     {
       category: "Design",
       items: "Figma, Google Stitch, Responsive Web Design",
     },
     {
-      category: "Dev Tools",
-      items: "GitHub, Postman, Swagger, VS Code, Visual Studio",
+      category: "Tools and Practice",
+      items: "Git/GitHub, Visual Studio, Postman, Swagger, Agile/Scrum",
+    },
+  ];
+
+  const experience = [
+    {
+      role: "Software Engineer and Intern",
+      org: "CodeStack Academy",
+      period: "Sep 2025 – Jun 2026",
+      desc: "Completed 1,000+ hours of intensive software engineering training in React, Next.js, C#, and .NET, including 300+ hours of internship experience on Stockfolio, CodeStack's internal application, contributing across both the API and client codebases. Also led TimeBank, my full stack capstone, from concept through deployment.",
+    },
+    {
+      role: "Substitute Teacher",
+      org: "Manteca Unified School District",
+      period: "2024 – 2025",
+      desc: "Adapted quickly across classrooms and subjects, keeping students engaged and lessons on track. The same clarity and structure I bring to code.",
+    },
+    {
+      role: "Teacher",
+      org: "India",
+      period: "2007 – 2010",
+      desc: "Taught across subjects and age groups, building the instinct to break hard ideas into simple, understandable steps.",
     },
   ];
 
@@ -118,6 +148,9 @@ export default function Page() {
             <a href="#work" className="nav-link">
               Work
             </a>
+            <a href="#experience" className="nav-link">
+              Experience
+            </a>
             <a href="#stack" className="nav-link">
               Stack
             </a>
@@ -175,10 +208,11 @@ export default function Page() {
               marginBottom: 36,
             }}
           >
-            Full stack software engineer and CodeStack Academy graduate. I spent
-            years as a teacher learning how to make hard things feel simple. Now
-            I build software with that same instinct: clean logic, clear
-            interfaces, nothing wasted.
+            Full stack software engineer and CodeStack Academy graduate with
+            1,000+ intensive hours. I craft modern, responsive web applications
+            with React, Next.js, C#, and .NET. Years of teaching taught me to
+            make hard things feel simple, and I build software with that same
+            instinct: clean logic, clear interfaces, nothing wasted.
           </p>
           <div
             style={{
@@ -188,7 +222,11 @@ export default function Page() {
               flexWrap: "wrap" as const,
             }}
           >
-            <a href="https://docs.google.com/document/d/1Hb3IMTS5r23AP6nOIUG8NOGrOcO1eks5UCCGXaws6_Q/edit?usp=sharing" target="_blank" className="btn">
+            <a
+              href="https://docs.google.com/document/d/1Hb3IMTS5r23AP6nOIUG8NOGrOcO1eks5UCCGXaws6_Q/edit?usp=sharing"
+              target="_blank"
+              className="btn"
+            >
               View Resume
             </a>
             <a
@@ -200,9 +238,7 @@ export default function Page() {
                 color: "#2563EB",
                 textDecoration: "none",
               }}
-            >
-              
-            </a>
+            ></a>
           </div>
         </section>
 
@@ -233,11 +269,12 @@ export default function Page() {
               The Story
             </span>
             <p style={{ fontSize: "0.92rem", color: "#444", lineHeight: 1.78 }}>
-              I graduated from CodeStack Academy&apos;s 1,000 hour program in June
-              2026. Before that, I spent years teaching across different
-              subjects and age groups. That background trained me to think
-              structurally, communicate clearly, and find the simplest path
-              through a complex problem. I bring that to every codebase I touch.
+              I graduated from CodeStack Academy&apos;s 1,000+ hour program in
+              June 2026, but my real training started years earlier in the
+              classroom. Teaching across different subjects and age groups taught
+              me to think clearly, explain things simply, and stay patient when a
+              problem refuses to make sense at first. I carry that same calm and
+              curiosity into every codebase I touch.
             </p>
           </div>
           <div
@@ -275,10 +312,10 @@ export default function Page() {
               <strong style={{ color: "white" }}>
                 Functional Transparency
               </strong>
-              . The best software, like the best lesson, removes friction
-              instead of adding flair. I build things that are technically solid
-              and immediately understandable. If a user has to guess what
-              something does, the design has already failed.
+              . The best software, like the best lesson, quietly removes friction
+              instead of adding flair. I care about building things that are
+              solid under the hood and effortless to use. If someone has to stop
+              and wonder what a button does, I know I still have work to do.
             </p>
           </div>
         </div>
@@ -376,11 +413,89 @@ export default function Page() {
                       color: "#E8E5DF",
                       flexShrink: 0,
                     }}
-                  >
-                    
-                  </p>
+                  ></p>
                 </div>
               </a>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section id="experience" style={{ marginBottom: 72 }}>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+              fontWeight: 900,
+              marginBottom: 32,
+            }}
+          >
+            Experience
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column" as const,
+              gap: 14,
+            }}
+          >
+            {experience.map((job) => (
+              <div key={job.org + job.period} className="card-hover">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "baseline",
+                    gap: 16,
+                    flexWrap: "wrap" as const,
+                    marginBottom: 6,
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "1.2rem",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {job.role}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase" as const,
+                      color: "#999",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {job.period}
+                  </p>
+                </div>
+                <p
+                  style={{
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase" as const,
+                    color: "#2563EB",
+                    marginBottom: 12,
+                  }}
+                >
+                  {job.org}
+                </p>
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#555",
+                    lineHeight: 1.68,
+                    maxWidth: 640,
+                  }}
+                >
+                  {job.desc}
+                </p>
+              </div>
             ))}
           </div>
         </section>
@@ -531,10 +646,7 @@ export default function Page() {
                 PallaviPattanashetti
               </p>
             </a>
-            <a
-              href="tel:6508685268"
-              className="contact-card"
-            >
+            <a href="tel:6508685268" className="contact-card">
               <p
                 style={{
                   fontSize: "0.66rem",
