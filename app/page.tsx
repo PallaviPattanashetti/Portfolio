@@ -1,6 +1,61 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 
 export default function Page() {
+  useEffect(() => {
+    // Scroll-reveal system
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 },
+    );
+    els.forEach((el) => io.observe(el));
+
+    // Scroll progress bar
+    const bar = document.getElementById("scroll-progress");
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+      if (bar) bar.style.width = `${pct}%`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // Pointer parallax on hero (layered depth)
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const collage = document.querySelector<HTMLElement>(".hero-collage");
+    let onMove: ((e: MouseEvent) => void) | null = null;
+    if (collage && !reduce) {
+      const layers = collage.querySelectorAll<HTMLElement>("[data-depth]");
+      onMove = (e: MouseEvent) => {
+        const r = collage.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+        const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        layers.forEach((l) => {
+          const depth = parseFloat(l.getAttribute("data-depth") || "0");
+          l.style.setProperty("--px", `${dx * depth * 14}px`);
+          l.style.setProperty("--py", `${dy * depth * 14}px`);
+        });
+      };
+      window.addEventListener("mousemove", onMove);
+    }
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      if (onMove) window.removeEventListener("mousemove", onMove);
+    };
+  }, []);
+
   const projects = [
     {
       name: "ActBridge",
@@ -20,7 +75,6 @@ export default function Page() {
       desc: "My full stack capstone project at CodeStack Academy, a community platform where people trade skills and time instead of money. As project lead of a four-person team, I drove most of the frontend build and worked closely with my teammates to plan what to build and how to approach it, guiding the project from concept to launch.",
       url: "https://newfrontend-lemon.vercel.app",
     },
-
     {
       name: "Pokémon Hub",
       role: "UI Design and Build",
@@ -36,7 +90,10 @@ export default function Page() {
   ];
 
   const stack = [
-    { category: "Languages", items: "C#, TypeScript, JavaScript, HTML5, CSS3, SQL" },
+    {
+      category: "Languages",
+      items: "C#, TypeScript, JavaScript, HTML5, CSS3, SQL",
+    },
     {
       category: "Frameworks",
       items: "React, Next.js, .NET, Tailwind CSS, Bootstrap",
@@ -90,35 +147,121 @@ export default function Page() {
         background: "#FAFAF8",
         color: "#1A1A1A",
         minHeight: "100vh",
+        overflowX: "hidden",
       }}
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #666; transition: color 0.2s; }
         .nav-link:hover { color: #2563EB; }
-        .btn { display: inline-block; background: #1A1A1A; color: white; padding: 13px 26px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s; text-decoration: none; }
-        .btn:hover { background: #2563EB; }
-        .proj-card { display: block; text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 28px 30px; transition: border-color 0.2s, box-shadow 0.2s; }
-        .proj-card:hover { border-color: #2563EB; box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
+        .btn { display: inline-block; background: #1A1A1A; color: white; padding: 13px 26px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+        .btn:hover { background: #2563EB; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(37,99,235,0.28); }
+
+        .proj-card { display: block; text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 28px 30px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
+        .proj-card:hover { border-color: #2563EB; box-shadow: 0 10px 30px rgba(37,99,235,0.12); transform: translateY(-3px); }
         .proj-card:hover .proj-name { color: #2563EB; }
+        .proj-card:hover .proj-arrow { color: #2563EB; transform: translateX(4px); }
         .proj-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; transition: color 0.2s; }
-        .card-hover { background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 30px; transition: border-color 0.2s; }
-        .card-hover:hover { border-color: #2563EB; }
-        .contact-card { display: block; text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 24px 28px; transition: border-color 0.2s; }
-        .contact-card:hover { border-color: #2563EB; }
-        .stack-row { display: flex; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid #F0EEE9; }
+        .proj-arrow { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: #D8D4CC; flex-shrink: 0; transition: color 0.25s, transform 0.25s; }
+
+        .card-hover { background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 30px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
+        .card-hover:hover { border-color: #2563EB; box-shadow: 0 10px 30px rgba(37,99,235,0.10); transform: translateY(-3px); }
+        .contact-card { text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
+        .contact-card:hover { border-color: #2563EB; box-shadow: 0 10px 26px rgba(37,99,235,0.12); transform: translateY(-3px); }
+        .contact-card:hover .contact-icon { background: #2563EB; color: #fff; }
+        .contact-card:hover .contact-arrow { color: #2563EB; opacity: 1; transform: translate(3px, -3px); }
+        .contact-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 10px; background: #F0EEE9; color: #2563EB; font-size: 1.1rem; font-weight: 700; transition: background 0.25s, color 0.25s; }
+        .contact-arrow { flex-shrink: 0; font-size: 1.1rem; font-weight: 700; color: #C8C4BC; opacity: 0.7; transition: color 0.25s, transform 0.25s, opacity 0.25s; }
+
+        .stack-row { display: flex; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid #F0EEE9; }
         .stack-row:last-child { border-bottom: none; }
+        .stack-accent { display: block; width: 26px; height: 3px; border-radius: 2px; background: #2563EB; margin-right: 4px; flex-shrink: 0; transform: scaleX(0); transform-origin: left; transition: transform 0.6s cubic-bezier(0.22,1,0.36,1) 0.15s; }
+        .reveal.in-view .stack-accent { transform: scaleX(1); }
+
+        /* Scroll progress bar */
+        #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563EB; z-index: 100; transition: width 0.08s linear; }
+
+        /* Reveal / motion system */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+        @keyframes fadeInOnly { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes flashGlow {
+          0% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+          35% { box-shadow: 0 0 0 3px rgba(37,99,235,0.30), 0 14px 34px rgba(37,99,235,0.22); }
+          100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+        }
+
+        .reveal { opacity: 0; transform: translateY(38px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); will-change: opacity, transform; }
+        .reveal.left { transform: translateX(-56px); }
+        .reveal.right { transform: translateX(56px); }
+        .reveal.scale { transform: scale(0.9); }
+        .reveal.in-view { opacity: 1; transform: none; }
+        .reveal.flash.in-view { animation: flashGlow 1.1s ease 0.15s; }
+
+        .hero-text { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+
+        /* Advanced hero: layered pointer parallax + brand duotone */
+        .hero-collage { position: relative; flex: 0 0 320px; height: 400px; perspective: 900px; }
+        .hero-blob { position: absolute; width: 250px; height: 250px; top: 60px; left: 24px; border-radius: 50%; background: radial-gradient(circle at 32% 30%, rgba(37,99,235,0.40), rgba(37,99,235,0) 70%); filter: blur(6px); z-index: 0; transform: translate(var(--px,0px), var(--py,0px)); transition: transform 0.5s ease; }
+        .hero-ring { position: absolute; top: 34px; left: 16px; width: 74px; height: 74px; border: 2px dashed rgba(37,99,235,0.55); border-radius: 50%; z-index: 3; animation: spin 18s linear infinite; transform: translate(var(--px,0px), var(--py,0px)); }
+        .hero-frame { position: absolute; z-index: 2; border-radius: 18px; overflow: hidden; border: 7px solid #fff; box-shadow: 0 26px 60px rgba(26,26,26,0.22); background: #fff; transform: translate(var(--px,0px), var(--py,0px)) rotate(var(--rot,0deg)); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease; animation: fadeInOnly 0.9s both; }
+        .hero-frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.2) contrast(1.04); transition: filter 0.5s ease; }
+        .hero-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(150deg, rgba(37,99,235,0.32), rgba(26,26,26,0.10) 65%); mix-blend-mode: multiply; transition: opacity 0.5s ease; }
+        .hero-frame:hover img { filter: grayscale(0) contrast(1.04); }
+        .hero-frame:hover::after { opacity: 0; }
+        .hero-frame.main { --rot: -3deg; width: 260px; height: 330px; top: 30px; right: 10px; }
+        .hero-badge-float { position: absolute; z-index: 4; bottom: -4px; right: 18px; background: #2563EB; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 16px; border-radius: 10px; box-shadow: 0 14px 32px rgba(37,99,235,0.38); transform: translate(var(--px,0px), var(--py,0px)); transition: transform 0.3s ease; animation: fadeInOnly 0.9s 0.3s both; }
+
+        /* Editorial mosaic gallery */
+        .mosaic { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; margin-bottom: 80px; }
+        .g-card { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 55px rgba(26,26,26,0.16); }
+        .g-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.03); transform: scale(1.02); transition: filter 0.6s ease, transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+        .g-card:hover img { filter: grayscale(0); transform: scale(1.07); }
+        .g-duo { position: absolute; inset: 0; background: linear-gradient(150deg, rgba(37,99,235,0.55), rgba(26,26,26,0.55)); mix-blend-mode: multiply; transition: opacity 0.5s ease; }
+        .g-card:hover .g-duo { opacity: 0; }
+        .g-num { position: absolute; top: 14px; left: 18px; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.4); }
+        .g-corner { position: absolute; top: 18px; right: 18px; width: 10px; height: 10px; border-top: 2px solid #fff; border-right: 2px solid #fff; opacity: 0.8; transition: width 0.4s ease, height 0.4s ease; }
+        .g-card:hover .g-corner { width: 22px; height: 22px; }
+        .g-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 20px; background: linear-gradient(to top, rgba(26,26,26,0.85), transparent); }
+        .g-label { font-family: 'Playfair Display', serif; font-weight: 900; color: #fff; font-size: 1.2rem; }
+        .g-cap { font-size: 0.8rem; color: rgba(255,255,255,0.85); line-height: 1.4; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease; }
+        .g-card:hover .g-cap { max-height: 60px; opacity: 1; margin-top: 5px; }
+
+        /* Clip-path wipe reveal */
+        .clip-up { clip-path: inset(0 0 100% 0); opacity: 0; transition: clip-path 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease, transform 0.9s cubic-bezier(0.22,1,0.36,1); transform: translateY(30px); }
+        .clip-up.in-view { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+          html { scroll-behavior: auto; }
+          .reveal, .clip-up { transition: none; opacity: 1; transform: none; clip-path: none; }
+          .reveal.in-view .stack-accent { transition: none; }
+          .reveal.flash.in-view { animation: none; }
+          .hero-text, .hero-frame, .hero-badge-float, .hero-ring { animation: none !important; }
+          .hero-blob, .hero-ring, .hero-frame, .hero-badge-float { transform: rotate(var(--rot,0deg)) !important; }
+        }
         @media (max-width: 640px) {
-          .stack-row { flex-direction: column; gap: 4px; }
+          .stack-row { align-items: flex-start; }
+        }
+        @media (max-width: 760px) {
+          .mosaic { grid-template-columns: 1fr; gap: 16px; }
+          .g-card { margin-top: 0 !important; height: 240px !important; }
+        }
+        @media (max-width: 780px) {
+          .hero-collage { display: none; }
         }
       `}</style>
+
+      <div id="scroll-progress" />
 
       {/* Nav */}
       <nav
         style={{
           borderBottom: "1px solid #E8E5DF",
-          background: "#FAFAF8",
+          background: "rgba(250,250,248,0.85)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
           position: "sticky",
           top: 0,
           zIndex: 50,
@@ -163,82 +306,101 @@ export default function Page() {
 
       <main style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
         {/* Hero */}
-        <section style={{ paddingTop: 72, paddingBottom: 64 }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              background: "#F0EEE9",
-              border: "1px solid #E0DDD6",
-              padding: "7px 16px",
-              borderRadius: 4,
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase" as const,
-              color: "#666",
-              marginBottom: 24,
-            }}
-          >
-            <span style={{ color: "#2563EB" }}>Teacher</span>
-            <span style={{ color: "#BBB" }}>turned</span>
-            <span style={{ color: "#2563EB" }}>Engineer</span>
-          </div>
-          <h1
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.6rem, 7vw, 5rem)",
-              fontWeight: 900,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              marginBottom: 24,
-            }}
-          >
-            Pallavi
-            <br />
-            Pattanashetti
-          </h1>
-          <p
-            style={{
-              fontSize: "1.02rem",
-              color: "#555",
-              lineHeight: 1.75,
-              maxWidth: 560,
-              marginBottom: 36,
-            }}
-          >
-            Full stack software engineer and CodeStack Academy graduate with
-            1,000+ intensive hours. I craft modern, responsive web applications
-            with React, Next.js, C#, and .NET. Years of teaching taught me to
-            make hard things feel simple, and I build software with that same
-            instinct: clean logic, clear interfaces, nothing wasted.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 20,
-              alignItems: "center",
-              flexWrap: "wrap" as const,
-            }}
-          >
-            <a
-              href="https://docs.google.com/document/d/1Hb3IMTS5r23AP6nOIUG8NOGrOcO1eks5UCCGXaws6_Q/edit?usp=sharing"
-              target="_blank"
-              className="btn"
-            >
-              View Resume
-            </a>
-            <a
-              href="https://newfrontend-lemon.vercel.app"
-              target="_blank"
+        <section
+          style={{
+            paddingTop: 72,
+            paddingBottom: 64,
+            display: "flex",
+            alignItems: "center",
+            gap: 48,
+            flexWrap: "wrap" as const,
+          }}
+        >
+          <div className="hero-text" style={{ flex: "1 1 380px" }}>
+            <div
               style={{
-                fontSize: "0.82rem",
-                fontWeight: 600,
-                color: "#2563EB",
-                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                background: "#F0EEE9",
+                border: "1px solid #E0DDD6",
+                padding: "7px 16px",
+                borderRadius: 4,
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase" as const,
+                color: "#666",
+                marginBottom: 24,
               }}
-            ></a>
+            >
+              <span style={{ color: "#2563EB" }}>Teacher</span>
+              <span style={{ color: "#BBB" }}>turned</span>
+              <span style={{ color: "#2563EB" }}>Engineer</span>
+            </div>
+            <h1
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(2.6rem, 7vw, 5rem)",
+                fontWeight: 900,
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                marginBottom: 24,
+              }}
+            >
+              Pallavi
+              <br />
+              Pattanashetti
+            </h1>
+            <p
+              style={{
+                fontSize: "1.02rem",
+                color: "#555",
+                lineHeight: 1.75,
+                maxWidth: 560,
+                marginBottom: 36,
+              }}
+            >
+              Full stack software engineer and CodeStack Academy graduate with
+              1,000+ intensive hours. I craft modern, responsive web
+              applications with React, Next.js, C#, and .NET. Years of teaching
+              taught me to make hard things feel simple, and I build software
+              with that same instinct: clean logic, clear interfaces, nothing
+              wasted.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: 20,
+                alignItems: "center",
+                flexWrap: "wrap" as const,
+              }}
+            >
+              <a
+                href="https://docs.google.com/document/d/1Hb3IMTS5r23AP6nOIUG8NOGrOcO1eks5UCCGXaws6_Q/edit?usp=sharing"
+                target="_blank"
+                className="btn"
+              >
+                View Resume
+              </a>
+              <a href="#work" className="nav-link">
+                See My Work
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-collage" aria-hidden="true">
+            <span className="hero-blob" data-depth="0.5" />
+            <span className="hero-ring" data-depth="2.2" />
+            <div className="hero-frame main" data-depth="1.2">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=640&q=80"
+                alt="Code on a screen"
+              />
+            </div>
+            <span className="hero-badge-float" data-depth="2.8">
+              1,000+ Hours
+            </span>
           </div>
         </section>
 
@@ -251,7 +413,7 @@ export default function Page() {
             marginBottom: 72,
           }}
         >
-          <div className="card-hover">
+          <div className="card-hover reveal left flash">
             <span
               style={{
                 display: "inline-block",
@@ -278,6 +440,7 @@ export default function Page() {
             </p>
           </div>
           <div
+            className="reveal right flash"
             style={{
               background: "#2563EB",
               border: "1px solid #2563EB",
@@ -309,9 +472,7 @@ export default function Page() {
               }}
             >
               I call it{" "}
-              <strong style={{ color: "white" }}>
-                Functional Transparency
-              </strong>
+              <strong style={{ color: "white" }}>Functional Transparency</strong>
               . The best software, like the best lesson, quietly removes friction
               instead of adding flair. I care about building things that are
               solid under the hood and effortless to use. If someone has to stop
@@ -320,9 +481,11 @@ export default function Page() {
           </div>
         </div>
 
+
         {/* Projects */}
         <section id="work" style={{ marginBottom: 72 }}>
           <div
+            className="reveal"
             style={{
               display: "flex",
               alignItems: "baseline",
@@ -363,13 +526,13 @@ export default function Page() {
               gap: 14,
             }}
           >
-            {projects.map((project) => (
+            {projects.map((project, i) => (
               <a
                 key={project.name}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="proj-card"
+                className={`proj-card reveal flash ${i % 2 === 0 ? "left" : "right"}`}
               >
                 <div
                   style={{
@@ -405,15 +568,7 @@ export default function Page() {
                       {project.desc}
                     </p>
                   </div>
-                  <p
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "1.3rem",
-                      fontWeight: 900,
-                      color: "#E8E5DF",
-                      flexShrink: 0,
-                    }}
-                  ></p>
+                  <span className="proj-arrow">↗</span>
                 </div>
               </a>
             ))}
@@ -423,6 +578,7 @@ export default function Page() {
         {/* Experience */}
         <section id="experience" style={{ marginBottom: 72 }}>
           <h2
+            className="reveal"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
@@ -439,8 +595,11 @@ export default function Page() {
               gap: 14,
             }}
           >
-            {experience.map((job) => (
-              <div key={job.org + job.period} className="card-hover">
+            {experience.map((job, i) => (
+              <div
+                key={job.org + job.period}
+                className={`card-hover reveal flash ${i % 2 === 0 ? "right" : "left"}`}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -503,6 +662,7 @@ export default function Page() {
         {/* Stack */}
         <section id="stack" style={{ marginBottom: 72 }}>
           <h2
+            className="reveal"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
@@ -520,8 +680,13 @@ export default function Page() {
               padding: "8px 28px",
             }}
           >
-            {stack.map((row) => (
-              <div key={row.category} className="stack-row">
+            {stack.map((row, i) => (
+              <div
+                key={row.category}
+                className="stack-row reveal left"
+                style={{ transitionDelay: `${i * 0.08}s` }}
+              >
+                <span className="stack-accent" />
                 <span
                   style={{
                     fontSize: "0.7rem",
@@ -548,6 +713,7 @@ export default function Page() {
         {/* Contact */}
         <section id="contact" style={{ marginBottom: 72 }}>
           <h2
+            className="reveal"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
@@ -560,120 +726,88 @@ export default function Page() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: 14,
+              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+              gap: 16,
             }}
           >
-            <a
-              href="mailto:Pallavi.Pattanashetti@gmail.com"
-              className="contact-card"
-            >
-              <p
+            {[
+              {
+                label: "Email",
+                value: "Pallavi.Pattanashetti@gmail.com",
+                href: "mailto:Pallavi.Pattanashetti@gmail.com",
+                icon: "✉",
+                external: false,
+              },
+              {
+                label: "LinkedIn",
+                value: "linkedin.com/in/pallavipraveen",
+                href: "https://linkedin.com/in/pallavipraveen",
+                icon: "in",
+                external: true,
+              },
+              {
+                label: "GitHub",
+                value: "PallaviPattanashetti",
+                href: "https://github.com/PallaviPattanashetti",
+                icon: "⌥",
+                external: true,
+              },
+              {
+                label: "Phone",
+                value: "650 868 5268",
+                href: "tel:6508685268",
+                icon: "☎",
+                external: false,
+              },
+            ].map((c, i) => (
+              <a
+                key={c.label}
+                href={c.href}
+                {...(c.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="contact-card reveal scale"
                 style={{
-                  fontSize: "0.66rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
-                  color: "#999",
-                  marginBottom: 4,
+                  transitionDelay: `${i * 0.08}s`,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 18,
+                  padding: "26px 30px",
                 }}
               >
-                Email
-              </p>
-              <p
-                style={{
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  wordBreak: "break-all" as const,
-                }}
-              >
-                Pallavi.Pattanashetti@gmail.com
-              </p>
-            </a>
-            <a
-              href="https://linkedin.com/in/pallavipraveen"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-card"
-            >
-              <p
-                style={{
-                  fontSize: "0.66rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
-                  color: "#999",
-                  marginBottom: 4,
-                }}
-              >
-                LinkedIn
-              </p>
-              <p
-                style={{
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  wordBreak: "break-all" as const,
-                }}
-              >
-                linkedin.com/in/pallavipraveen
-              </p>
-            </a>
-            <a
-              href="https://github.com/PallaviPattanashetti"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-card"
-            >
-              <p
-                style={{
-                  fontSize: "0.66rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
-                  color: "#999",
-                  marginBottom: 4,
-                }}
-              >
-                GitHub
-              </p>
-              <p
-                style={{
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  wordBreak: "break-all" as const,
-                }}
-              >
-                PallaviPattanashetti
-              </p>
-            </a>
-            <a href="tel:6508685268" className="contact-card">
-              <p
-                style={{
-                  fontSize: "0.66rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
-                  color: "#999",
-                  marginBottom: 4,
-                }}
-              >
-                Phone
-              </p>
-              <p
-                style={{
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  wordBreak: "break-all" as const,
-                }}
-              >
-                650 868 5268
-              </p>
-            </a>
+                <span className="contact-icon">{c.icon}</span>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <p
+                    style={{
+                      fontSize: "0.66rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase" as const,
+                      color: "#999",
+                      marginBottom: 5,
+                    }}
+                  >
+                    {c.label}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: 600,
+                      wordBreak: "break-word" as const,
+                    }}
+                  >
+                    {c.value}
+                  </p>
+                </div>
+                <span className="contact-arrow">↗</span>
+              </a>
+            ))}
           </div>
         </section>
 
         {/* Education and Community */}
         <div
+          className="reveal scale flash"
           style={{
             background: "#1A1A1A",
             color: "white",
@@ -803,8 +937,8 @@ export default function Page() {
                 }}
               >
                 TEDxManteca Event Representative, former Scout Den Leader, and
-                community volunteer. I show up the same way in the community as
-                I do at my desk.
+                community volunteer. I show up the same way in the community as I
+                do at my desk.
               </p>
             </div>
           </div>
