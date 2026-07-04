@@ -414,7 +414,6 @@ export default function Page() {
           </div>
 
           <div className="hero-collage" aria-hidden="true">
-            <span className="hero-blob" data-depth="0.5" />
             <span className="hero-ring" data-depth="2.2" />
             <div className="hero-frame main" data-depth="1.2">
               <img
