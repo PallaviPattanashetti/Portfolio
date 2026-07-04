@@ -593,6 +593,46 @@ export default function Page() {
         </div>
 
 
+        {/* Stack */}
+        <section id="stack" style={{ marginBottom: 72 }}>
+          <h2
+            className="reveal"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+              fontWeight: 900,
+              marginBottom: 32,
+            }}
+          >
+            Technical Stack
+          </h2>
+          <div className="stack-grid">
+            {stack.map((row, i) => (
+              <div
+                key={row.category}
+                className="stack-card reveal left"
+                style={{ transitionDelay: `${i * 0.06}s` }}
+              >
+                <div className="stack-card-head">
+                  <span className="stack-ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      {stackIcons[row.icon]}
+                    </svg>
+                  </span>
+                  <span className="stack-cat">{row.category}</span>
+                </div>
+                <div className="stack-pills">
+                  {row.items.map((item) => (
+                    <span key={item} className="stack-pill">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Projects */}
         <section id="work" style={{ marginBottom: 72 }}>
           <div
@@ -782,46 +822,6 @@ export default function Page() {
               </div>
             ))}
             </div>
-          </div>
-        </section>
-
-        {/* Stack */}
-        <section id="stack" style={{ marginBottom: 72 }}>
-          <h2
-            className="reveal"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
-              fontWeight: 900,
-              marginBottom: 32,
-            }}
-          >
-            Technical Stack
-          </h2>
-          <div className="stack-grid">
-            {stack.map((row, i) => (
-              <div
-                key={row.category}
-                className="stack-card reveal left"
-                style={{ transitionDelay: `${i * 0.06}s` }}
-              >
-                <div className="stack-card-head">
-                  <span className="stack-ico">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      {stackIcons[row.icon]}
-                    </svg>
-                  </span>
-                  <span className="stack-cat">{row.category}</span>
-                </div>
-                <div className="stack-pills">
-                  {row.items.map((item) => (
-                    <span key={item} className="stack-pill">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
           </div>
         </section>
 
