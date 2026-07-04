@@ -534,7 +534,7 @@ export default function Page() {
               The Story
             </span>
             <p className="story-text">
-              I graduated from CodeStack Academy&apos;s 1,000+ hour program in
+              I graduated from CodeStack Academy&apos;s 1,300+ hour program in
               June 2026, but my real training started years earlier in the
               classroom. Teaching across different subjects and age groups taught
               me to think clearly, explain things simply, and stay patient when a
