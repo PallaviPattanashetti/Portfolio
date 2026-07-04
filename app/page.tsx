@@ -409,8 +409,8 @@ export default function Page() {
           <div className="hero-collage" aria-hidden="true">
             <div className="hero-frame main" data-depth="1.2">
               <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=640&q=80"
-                alt="Code on a screen"
+                src="/headshot.jpg"
+                alt="Pallavi Pattanashetti"
               />
             </div>
             <span className="hero-badge-float" data-depth="2.8">
