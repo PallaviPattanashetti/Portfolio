@@ -85,7 +85,13 @@ export default function Page() {
       name: "Influence Site",
       role: "UI Design and Build",
       desc: "A clean, responsive site focused on hierarchy and readability. The goal was to let the content breathe while keeping the structure sharp.",
-      url: "https://influentialperson-git-main-pallavipattanashettis-projects.vercel.app/",
+      url: "https://influentialperson.vercel.app",
+    },
+    {
+      name: "All For One",
+      role: "UI Design and Build",
+      desc: "A responsive Next.js web app focused on clean layout, clear hierarchy, and a smooth, accessible user experience across devices.",
+      url: "https://allforonenextjs-ou1m.vercel.app",
     },
   ];
 
@@ -165,6 +171,13 @@ export default function Page() {
         .proj-card:hover .proj-arrow { color: #2563EB; transform: translateX(4px); }
         .proj-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; transition: color 0.2s; }
         .proj-arrow { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: #D8D4CC; flex-shrink: 0; transition: color 0.25s, transform 0.25s; }
+        .proj-preview { flex: 0 0 240px; width: 240px; border: 1px solid #E8E5DF; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.06); transition: box-shadow 0.25s, transform 0.25s; }
+        .proj-card:hover .proj-preview { box-shadow: 0 12px 28px rgba(37,99,235,0.16); transform: translateY(-2px); }
+        .proj-preview-bar { height: 24px; background: #F1EFEA; display: flex; align-items: center; gap: 6px; padding: 0 10px; border-bottom: 1px solid #E8E5DF; }
+        .proj-preview-bar span { width: 8px; height: 8px; border-radius: 50%; background: #D0CCC4; }
+        .proj-preview-viewport { position: relative; width: 240px; height: 160px; overflow: hidden; background: #FAFAF8; }
+        .proj-preview-viewport iframe { position: absolute; top: 0; left: 0; width: 960px; height: 640px; border: 0; transform: scale(0.25); transform-origin: top left; pointer-events: none; }
+        @media (max-width: 640px) { .proj-preview, .proj-preview-viewport { width: 100%; } .proj-preview-viewport iframe { transform: scale(0.35); } }
 
         .card-hover { background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 30px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
         .card-hover:hover { border-color: #2563EB; box-shadow: 0 10px 30px rgba(37,99,235,0.10); transform: translateY(-3px); }
@@ -580,6 +593,22 @@ export default function Page() {
                     >
                       {project.desc}
                     </p>
+                  </div>
+                  <div className="proj-preview" aria-hidden="true">
+                    <div className="proj-preview-bar">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                    <div className="proj-preview-viewport">
+                      <iframe
+                        src={project.url}
+                        title={`${project.name} preview`}
+                        loading="lazy"
+                        scrolling="no"
+                        tabIndex={-1}
+                      />
+                    </div>
                   </div>
                   <span className="proj-arrow">↗</span>
                 </div>
