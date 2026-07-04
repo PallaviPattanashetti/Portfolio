@@ -410,14 +410,14 @@ export default function Page() {
             Pallavi<span style={{ color: "#2563EB" }}>.</span>
           </p>
           <div style={{ display: "flex", gap: 28 }}>
+            <a href="#stack" className="nav-link">
+              Stack
+            </a>
             <a href="#work" className="nav-link">
               Projects
             </a>
             <a href="#experience" className="nav-link">
               Experience
-            </a>
-            <a href="#stack" className="nav-link">
-              Stack
             </a>
             <a href="#contact" className="nav-link">
               Contact
