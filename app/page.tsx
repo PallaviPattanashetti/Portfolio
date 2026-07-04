@@ -98,24 +98,33 @@ export default function Page() {
   const stack = [
     {
       category: "Languages",
-      items: "C#, TypeScript, JavaScript, HTML5, CSS3, SQL",
+      icon: "code",
+      items: ["C#", "TypeScript", "JavaScript", "HTML5", "CSS3", "SQL"],
     },
     {
       category: "Frameworks",
-      items: "React, Next.js, .NET, Tailwind CSS, Bootstrap",
+      icon: "layers",
+      items: ["React", "Next.js", ".NET", "Tailwind CSS", "Bootstrap"],
     },
-    { category: "Backend", items: "ASP.NET Core, Web API, Node.js, REST APIs" },
+    {
+      category: "Backend",
+      icon: "server",
+      items: ["ASP.NET Core", "Web API", "Node.js", "REST APIs"],
+    },
     {
       category: "Cloud and Data",
-      items: "Microsoft Azure, SQL Server, Vercel, Railway",
+      icon: "cloud",
+      items: ["Microsoft Azure", "SQL Server", "Vercel", "Railway"],
     },
     {
       category: "Design",
-      items: "Figma, Google Stitch, Responsive Web Design",
+      icon: "palette",
+      items: ["Figma", "Google Stitch", "Responsive Web Design"],
     },
     {
       category: "Tools and Practice",
-      items: "Git/GitHub, Visual Studio, Postman, Swagger, Agile/Scrum",
+      icon: "tools",
+      items: ["Git/GitHub", "Visual Studio", "Postman", "Swagger", "Agile/Scrum"],
     },
   ];
 
@@ -145,6 +154,49 @@ export default function Page() {
     "AI Fluency for Educators (Anthropic, Apr 2026)",
     "AI Fluency: Framework and Foundations (Anthropic, Apr 2026)",
   ];
+
+  const stackIcons: Record<string, React.ReactNode> = {
+    code: (
+      <path d="M8 6L3 12l5 6M16 6l5 6-5 6M13.5 4l-3 16" />
+    ),
+    layers: (
+      <path d="M12 3l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5" />
+    ),
+    server: (
+      <>
+        <rect x="3" y="4" width="18" height="6" rx="1.5" />
+        <rect x="3" y="14" width="18" height="6" rx="1.5" />
+        <path d="M7 7h.01M7 17h.01" />
+      </>
+    ),
+    cloud: (
+      <path d="M17.5 19a4.5 4.5 0 0 0 .5-8.97A6 6 0 0 0 6.34 9.5 4 4 0 0 0 7 17.5h10.5z" />
+    ),
+    palette: (
+      <>
+        <path d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-1 .8-1.5 1.7-1.5H16a5 5 0 0 0 5-5c0-3.9-4-7-9-7z" />
+        <path d="M7.5 12h.01M10 8h.01M14 7.5h.01M17 10h.01" />
+      </>
+    ),
+    tools: (
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L4 16.8 7.2 20l5.3-5.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.3-2.3 2.6-2.6z" />
+    ),
+  };
+
+  const contactIcons: Record<string, React.ReactNode> = {
+    email: (
+      <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 7 8-5H4l8 5zM4 8v10h16V8l-8 5-8-5z" />
+    ),
+    linkedin: (
+      <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.3a1.8 1.8 0 1 1 0-3.5 1.8 1.8 0 0 1 0 3.5zM19 19h-3v-4.7c0-1.1 0-2.5-1.5-2.5s-1.8 1.2-1.8 2.4V19h-3v-9h2.9v1.2h.04a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.7 2 3.7 4.7V19z" />
+    ),
+    github: (
+      <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.7 2.6 1.3.1-.7.4-1.2.7-1.4-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.8 18 5.1 18 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z" />
+    ),
+    phone: (
+      <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z" />
+    ),
+  };
 
   return (
     <div
@@ -199,17 +251,35 @@ export default function Page() {
 
         /* Philosophy: books / library background */
         .philo-card { border-left: 5px solid #1A1A1A; background-image: linear-gradient(150deg, rgba(37,99,235,0.90), rgba(26,26,26,0.86)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=900&q=80'); background-size: cover; background-position: center; }
-        .contact-card { text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
-        .contact-card:hover { border-color: #2563EB; box-shadow: 0 10px 26px rgba(37,99,235,0.12); transform: translateY(-3px); }
-        .contact-card:hover .contact-icon { background: #2563EB; color: #fff; }
+        @property --ai-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+        .contact-card { position: relative; overflow: hidden; text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 14px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+        .contact-card::before { content: ""; position: absolute; top: 0; left: -70%; width: 60%; height: 100%; background: linear-gradient(100deg, transparent, rgba(37,99,235,0.12), transparent); transform: skewX(-18deg); transition: left 0.75s ease; pointer-events: none; z-index: 3; }
+        .contact-card:hover::before { left: 135%; }
+        .contact-card:hover { border-color: rgba(37,99,235,0.5); box-shadow: 0 16px 40px rgba(37,99,235,0.16); transform: translateY(-4px); }
         .contact-card:hover .contact-arrow { color: #2563EB; opacity: 1; transform: translate(3px, -3px); }
-        .contact-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 10px; background: #F0EEE9; color: #2563EB; font-size: 1.1rem; font-weight: 700; transition: background 0.25s, color 0.25s; }
-        .contact-arrow { flex-shrink: 0; font-size: 1.1rem; font-weight: 700; color: #C8C4BC; opacity: 0.7; transition: color 0.25s, transform 0.25s, opacity 0.25s; }
+        .contact-icon { position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 60px; height: 60px; border-radius: 16px; color: #2563EB; isolation: isolate; transition: color 0.3s; }
+        .contact-icon svg { position: relative; z-index: 2; width: 30px; height: 30px; fill: currentColor; transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1); }
+        .contact-icon::before { content: ""; position: absolute; inset: 0; border-radius: 16px; padding: 2px; background: conic-gradient(from var(--ai-a), #2563EB, #86a6ff, #2563EB, #1e3a8a, #2563EB); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.4; animation: aiSpin 6s linear infinite; z-index: 1; transition: opacity 0.3s; }
+        .contact-icon::after { content: ""; position: absolute; inset: 2px; border-radius: 14px; background: #F2F0EB; z-index: 1; transition: background 0.3s; }
+        .contact-card:hover .contact-icon { color: #fff; }
+        .contact-card:hover .contact-icon::before { opacity: 1; }
+        .contact-card:hover .contact-icon::after { background: #2563EB; }
+        .contact-card:hover .contact-icon svg { transform: scale(1.14) rotate(-6deg); }
+        @keyframes aiSpin { to { --ai-a: 360deg; } }
+        .contact-arrow { flex-shrink: 0; font-size: 1.2rem; font-weight: 700; color: #C8C4BC; opacity: 0.7; transition: color 0.25s, transform 0.25s, opacity 0.25s; }
 
-        .stack-row { display: flex; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid #F0EEE9; }
-        .stack-row:last-child { border-bottom: none; }
-        .stack-accent { display: block; width: 26px; height: 3px; border-radius: 2px; background: #2563EB; margin-right: 4px; flex-shrink: 0; transform: scaleX(0); transform-origin: left; transition: transform 0.6s cubic-bezier(0.22,1,0.36,1) 0.15s; }
-        .reveal.in-view .stack-accent { transform: scaleX(1); }
+        .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+        .stack-card { background: white; border: 1px solid #E8E5DF; border-radius: 14px; padding: 24px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
+        .stack-card:hover { border-color: #2563EB; box-shadow: 0 12px 30px rgba(37,99,235,0.10); transform: translateY(-3px); }
+        .stack-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .stack-ico { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(37,99,235,0.10); color: #2563EB; flex-shrink: 0; transition: background 0.25s, color 0.25s; }
+        .stack-card:hover .stack-ico { background: #2563EB; color: #fff; }
+        .stack-ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+        .stack-cat { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #2563EB; }
+        .stack-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .stack-pill { font-size: 0.82rem; font-weight: 600; color: #333; background: #F5F3EE; border: 1px solid #E8E5DF; border-radius: 999px; padding: 6px 13px; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .stack-card:hover .stack-pill { border-color: rgba(37,99,235,0.25); }
+        .stack-pill:hover { background: #2563EB; color: #fff; border-color: #2563EB; }
 
         /* Scroll progress bar */
         #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563EB; z-index: 100; transition: width 0.08s linear; }
@@ -273,13 +343,10 @@ export default function Page() {
         @media (prefers-reduced-motion: reduce) {
           html { scroll-behavior: auto; }
           .reveal, .clip-up, .book { transition: none; opacity: 1; transform: none; clip-path: none; }
-          .reveal.in-view .stack-accent { transition: none; }
           .reveal.flash.in-view { animation: none; }
+          .contact-icon::before { animation: none; opacity: 0.55; }
           .hero-text, .hero-frame, .hero-badge-float, .hero-ring { animation: none !important; }
           .hero-blob, .hero-ring, .hero-frame, .hero-badge-float { transform: rotate(var(--rot,0deg)) !important; }
-        }
-        @media (max-width: 640px) {
-          .stack-row { align-items: flex-start; }
         }
         @media (max-width: 760px) {
           .mosaic { grid-template-columns: 1fr; gap: 16px; }
@@ -326,7 +393,7 @@ export default function Page() {
           </p>
           <div style={{ display: "flex", gap: 28 }}>
             <a href="#work" className="nav-link">
-              Work
+              Projects
             </a>
             <a href="#experience" className="nav-link">
               Experience
@@ -714,39 +781,28 @@ export default function Page() {
           >
             Technical Stack
           </h2>
-          <div
-            style={{
-              background: "white",
-              border: "1px solid #E8E5DF",
-              borderRadius: 12,
-              padding: "8px 28px",
-            }}
-          >
+          <div className="stack-grid">
             {stack.map((row, i) => (
               <div
                 key={row.category}
-                className="stack-row reveal left"
-                style={{ transitionDelay: `${i * 0.08}s` }}
+                className="stack-card reveal left"
+                style={{ transitionDelay: `${i * 0.06}s` }}
               >
-                <span className="stack-accent" />
-                <span
-                  style={{
-                    fontSize: "0.7rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase" as const,
-                    color: "#2563EB",
-                    minWidth: 140,
-                    flexShrink: 0,
-                  }}
-                >
-                  {row.category}
-                </span>
-                <span
-                  style={{ fontSize: "0.9rem", color: "#444", lineHeight: 1.5 }}
-                >
-                  {row.items}
-                </span>
+                <div className="stack-card-head">
+                  <span className="stack-ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      {stackIcons[row.icon]}
+                    </svg>
+                  </span>
+                  <span className="stack-cat">{row.category}</span>
+                </div>
+                <div className="stack-pills">
+                  {row.items.map((item) => (
+                    <span key={item} className="stack-pill">
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -777,28 +833,28 @@ export default function Page() {
                 label: "Email",
                 value: "Pallavi.Pattanashetti@gmail.com",
                 href: "mailto:Pallavi.Pattanashetti@gmail.com",
-                icon: "✉",
+                icon: "email",
                 external: false,
               },
               {
                 label: "LinkedIn",
                 value: "linkedin.com/in/pallavipraveen",
                 href: "https://linkedin.com/in/pallavipraveen",
-                icon: "in",
+                icon: "linkedin",
                 external: true,
               },
               {
                 label: "GitHub",
                 value: "PallaviPattanashetti",
                 href: "https://github.com/PallaviPattanashetti",
-                icon: "⌥",
+                icon: "github",
                 external: true,
               },
               {
                 label: "Phone",
                 value: "650 868 5268",
                 href: "tel:6508685268",
-                icon: "☎",
+                icon: "phone",
                 external: false,
               },
             ].map((c, i) => (
@@ -817,7 +873,11 @@ export default function Page() {
                   padding: "26px 30px",
                 }}
               >
-                <span className="contact-icon">{c.icon}</span>
+                <span className="contact-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    {contactIcons[c.icon]}
+                  </svg>
+                </span>
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <p
                     style={{
