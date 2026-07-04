@@ -414,7 +414,6 @@ export default function Page() {
           </div>
 
           <div className="hero-collage" aria-hidden="true">
-            <span className="hero-ring" data-depth="2.2" />
             <div className="hero-frame main" data-depth="1.2">
               <img
                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=640&q=80"
