@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 export default function Page() {
   useEffect(() => {
     // Scroll-reveal system
-    const els = document.querySelectorAll(".reveal");
+    const els = document.querySelectorAll(".reveal, .book");
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -168,6 +168,24 @@ export default function Page() {
 
         .card-hover { background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 30px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
         .card-hover:hover { border-color: #2563EB; box-shadow: 0 10px 30px rgba(37,99,235,0.10); transform: translateY(-3px); }
+
+        .about-card { position: relative; overflow: hidden; padding: 36px 34px; }
+        .about-quote { position: absolute; top: 2px; right: 20px; font-family: 'Playfair Display', serif; font-size: 6.5rem; line-height: 1; font-weight: 900; pointer-events: none; user-select: none; }
+        .about-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; margin-bottom: 20px; }
+        .about-stats { display: flex; gap: 26px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #F0EEE9; flex-wrap: wrap; }
+        .about-stat b { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 900; color: #1A1A1A; display: block; line-height: 1; margin-bottom: 5px; }
+        .about-stat span { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #999; }
+        .about-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
+        .about-sign { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-top: 20px; opacity: 0.92; }
+
+        /* Story: storybook page */
+        .story-card { border-left: 5px solid #2563EB; background-image: linear-gradient(135deg, rgba(255,253,249,0.93), rgba(246,242,233,0.90)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=900&q=80'); background-size: cover; background-position: center; }
+        .story-text { font-size: 0.94rem; color: #444; line-height: 1.85; }
+        .story-text::first-letter { font-family: 'Playfair Display', serif; font-size: 3.6rem; font-weight: 900; color: #2563EB; float: left; line-height: 0.82; padding: 6px 12px 0 0; }
+        .story-card .about-stat b { color: #1A1A1A; }
+
+        /* Philosophy: books / library background */
+        .philo-card { border-left: 5px solid #1A1A1A; background-image: linear-gradient(150deg, rgba(37,99,235,0.90), rgba(26,26,26,0.86)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=900&q=80'); background-size: cover; background-position: center; }
         .contact-card { text-decoration: none; color: inherit; background: white; border: 1px solid #E8E5DF; border-radius: 12px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
         .contact-card:hover { border-color: #2563EB; box-shadow: 0 10px 26px rgba(37,99,235,0.12); transform: translateY(-3px); }
         .contact-card:hover .contact-icon { background: #2563EB; color: #fff; }
@@ -198,7 +216,13 @@ export default function Page() {
         .reveal.right { transform: translateX(56px); }
         .reveal.scale { transform: scale(0.9); }
         .reveal.in-view { opacity: 1; transform: none; }
-        .reveal.flash.in-view { animation: flashGlow 1.1s ease 0.15s; }
+        .flash.in-view { animation: flashGlow 1.1s ease 0.15s; }
+
+        /* Book-open reveal (page swings in from the spine) */
+        .book { opacity: 0; transition: opacity 0.8s ease, transform 0.95s cubic-bezier(0.34,1.2,0.5,1); transform-style: preserve-3d; will-change: opacity, transform; }
+        .book.page-left { transform-origin: right center; transform: perspective(1300px) rotateY(-46deg); }
+        .book.page-right { transform-origin: left center; transform: perspective(1300px) rotateY(46deg); }
+        .book.in-view { opacity: 1; transform: perspective(1300px) rotateY(0deg); }
 
         .hero-text { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both; }
 
@@ -235,7 +259,7 @@ export default function Page() {
 
         @media (prefers-reduced-motion: reduce) {
           html { scroll-behavior: auto; }
-          .reveal, .clip-up { transition: none; opacity: 1; transform: none; clip-path: none; }
+          .reveal, .clip-up, .book { transition: none; opacity: 1; transform: none; clip-path: none; }
           .reveal.in-view .stack-accent { transition: none; }
           .reveal.flash.in-view { animation: none; }
           .hero-text, .hero-frame, .hero-badge-float, .hero-ring { animation: none !important; }
@@ -413,24 +437,14 @@ export default function Page() {
             marginBottom: 72,
           }}
         >
-          <div className="card-hover reveal left flash">
+          <div className="card-hover about-card story-card book page-left flash">
             <span
-              style={{
-                display: "inline-block",
-                background: "#1A1A1A",
-                color: "white",
-                fontSize: "0.68rem",
-                fontWeight: 700,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase" as const,
-                padding: "4px 10px",
-                borderRadius: 2,
-                marginBottom: 18,
-              }}
+              className="about-tag"
+              style={{ background: "#1A1A1A", color: "white" }}
             >
               The Story
             </span>
-            <p style={{ fontSize: "0.92rem", color: "#444", lineHeight: 1.78 }}>
+            <p className="story-text">
               I graduated from CodeStack Academy&apos;s 1,000+ hour program in
               June 2026, but my real training started years earlier in the
               classroom. Teaching across different subjects and age groups taught
@@ -438,46 +452,54 @@ export default function Page() {
               problem refuses to make sense at first. I carry that same calm and
               curiosity into every codebase I touch.
             </p>
+            <div className="about-stats">
+              <div className="about-stat">
+                <b>1,000+</b>
+                <span>Training Hours</span>
+              </div>
+              <div className="about-stat">
+                <b>300+</b>
+                <span>Internship Hours</span>
+              </div>
+              <div className="about-stat">
+                <b>5</b>
+                <span>Live Projects</span>
+              </div>
+            </div>
           </div>
           <div
-            className="reveal right flash"
+            className="about-card philo-card book page-right flash"
             style={{
-              background: "#2563EB",
               border: "1px solid #2563EB",
               borderRadius: 12,
-              padding: 30,
             }}
           >
             <span
-              style={{
-                display: "inline-block",
-                background: "rgba(255,255,255,0.2)",
-                color: "white",
-                fontSize: "0.68rem",
-                fontWeight: 700,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase" as const,
-                padding: "4px 10px",
-                borderRadius: 2,
-                marginBottom: 18,
-              }}
+              className="about-quote"
+              style={{ color: "rgba(255,255,255,0.16)" }}
+            >
+              &ldquo;
+            </span>
+            <span
+              className="about-tag"
+              style={{ background: "rgba(255,255,255,0.2)", color: "white" }}
             >
               Philosophy
             </span>
+            <p className="about-title">Functional Transparency</p>
             <p
               style={{
-                fontSize: "0.92rem",
-                color: "rgba(255,255,255,0.9)",
-                lineHeight: 1.78,
+                fontSize: "0.94rem",
+                color: "rgba(255,255,255,0.92)",
+                lineHeight: 1.8,
               }}
             >
-              I call it{" "}
-              <strong style={{ color: "white" }}>Functional Transparency</strong>
-              . The best software, like the best lesson, quietly removes friction
+              The best software, like the best lesson, quietly removes friction
               instead of adding flair. I care about building things that are
               solid under the hood and effortless to use. If someone has to stop
               and wonder what a button does, I know I still have work to do.
             </p>
+            <p className="about-sign">— Pallavi</p>
           </div>
         </div>
 
