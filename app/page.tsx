@@ -234,6 +234,22 @@ export default function Page() {
         .card-hover { background: white; border: 1px solid #E8E5DF; border-radius: 12px; padding: 30px; transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
         .card-hover:hover { border-color: #2563EB; box-shadow: 0 10px 30px rgba(37,99,235,0.10); transform: translateY(-3px); }
 
+        /* Experience — teaching light background + timeline motion */
+        .exp-wrap { position: relative; overflow: hidden; border-radius: 20px; padding: 34px; border: 1px solid #ECE8E0; background: linear-gradient(135deg, #FFFDF7 0%, #F3F6FF 52%, #FBF6EF 100%); }
+        .exp-wrap::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 37px, rgba(37,99,235,0.055) 38px); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); pointer-events: none; z-index: 0; }
+        .exp-orb { position: absolute; border-radius: 50%; filter: blur(42px); opacity: 0.5; z-index: 0; pointer-events: none; animation: expFloat 13s ease-in-out infinite; }
+        .exp-orb.a { width: 220px; height: 220px; top: -60px; right: -40px; background: radial-gradient(circle, rgba(37,99,235,0.38), transparent 70%); }
+        .exp-orb.b { width: 190px; height: 190px; bottom: -60px; left: -40px; background: radial-gradient(circle, rgba(255,176,92,0.32), transparent 70%); animation-delay: -4.5s; }
+        .exp-orb.c { width: 150px; height: 150px; top: 42%; left: 46%; background: radial-gradient(circle, rgba(124,164,255,0.28), transparent 70%); animation-delay: -8.5s; }
+        @keyframes expFloat { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-26px) translateX(10px); } }
+        .exp-list { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; }
+        .exp-card { position: relative; overflow: hidden; background: rgba(255,255,255,0.72); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); border: 1px solid rgba(232,229,223,0.9); border-radius: 14px; padding: 26px 28px 26px 34px; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+        .exp-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(#2563EB, #86a6ff); transform: scaleY(0); transform-origin: top; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s; z-index: 2; }
+        .exp-card.in-view::before { transform: scaleY(1); }
+        .exp-card::after { content: ""; position: absolute; top: 0; left: -70%; width: 55%; height: 100%; background: linear-gradient(100deg, transparent, rgba(37,99,235,0.10), transparent); transform: skewX(-18deg); transition: left 0.8s ease; pointer-events: none; z-index: 1; }
+        .exp-card:hover { transform: translateX(5px); box-shadow: 0 16px 38px rgba(37,99,235,0.14); border-color: rgba(37,99,235,0.4); }
+        .exp-card:hover::after { left: 145%; }
+
         .about-card { position: relative; overflow: hidden; padding: 36px 34px; }
         .about-quote { position: absolute; top: 2px; right: 20px; font-family: 'Playfair Display', serif; font-size: 6.5rem; line-height: 1; font-weight: 900; pointer-events: none; user-select: none; }
         .about-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; margin-bottom: 20px; }
@@ -345,6 +361,8 @@ export default function Page() {
           .reveal, .clip-up, .book { transition: none; opacity: 1; transform: none; clip-path: none; }
           .reveal.flash.in-view { animation: none; }
           .contact-icon::before { animation: none; opacity: 0.55; }
+          .exp-orb { animation: none; }
+          .exp-card::before { transition: none; }
           .hero-text, .hero-frame, .hero-badge-float, .hero-ring { animation: none !important; }
           .hero-blob, .hero-ring, .hero-frame, .hero-badge-float { transform: rotate(var(--rot,0deg)) !important; }
         }
@@ -697,17 +715,15 @@ export default function Page() {
           >
             Experience
           </h2>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column" as const,
-              gap: 14,
-            }}
-          >
+          <div className="exp-wrap reveal scale">
+            <span className="exp-orb a" aria-hidden="true" />
+            <span className="exp-orb b" aria-hidden="true" />
+            <span className="exp-orb c" aria-hidden="true" />
+            <div className="exp-list">
             {experience.map((job, i) => (
               <div
                 key={job.org + job.period}
-                className={`card-hover reveal flash ${i % 2 === 0 ? "right" : "left"}`}
+                className={`exp-card reveal flash ${i % 2 === 0 ? "right" : "left"}`}
               >
                 <div
                   style={{
@@ -765,6 +781,7 @@ export default function Page() {
                 </p>
               </div>
             ))}
+            </div>
           </div>
         </section>
 
