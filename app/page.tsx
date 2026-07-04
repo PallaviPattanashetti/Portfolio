@@ -964,7 +964,7 @@ export default function Page() {
                 {[
                   {
                     label: "Software Engineering",
-                    name: "CodeStack Academy, Graduating June 2026",
+                    name: "CodeStack Academy, Graduated June 2026",
                   },
                   {
                     label: "Bachelor of Education",
