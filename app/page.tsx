@@ -133,7 +133,7 @@ export default function Page() {
       role: "Software Engineer and Intern",
       org: "CodeStack Academy",
       period: "Sep 2025 – Jun 2026",
-      desc: "Completed 1,000+ hours of intensive software engineering training in React, Next.js, C#, and .NET, including 300+ hours of internship experience on Stockfolio, CodeStack's internal application, contributing across both the API and client codebases. Also led TimeBank, my full stack capstone, from concept through deployment.",
+      desc: "Completed 1,300+ hours of intensive software engineering training in React, Next.js, C#, and .NET, including 300+ hours of internship experience on Stockfolio, CodeStack's internal application, contributing across both the API and client codebases. Also led TimeBank, my full stack capstone, from concept through deployment.",
     },
     {
       role: "Substitute Teacher",
@@ -484,7 +484,7 @@ export default function Page() {
               }}
             >
               Full stack software engineer and CodeStack Academy graduate with
-              1,000+ intensive hours. I craft modern, responsive web
+              1,300+ intensive hours. I craft modern, responsive web
               applications with React, Next.js, C#, and .NET. Years of teaching
               taught me to make hard things feel simple, and I build software
               with that same instinct: clean logic, clear interfaces, nothing
@@ -512,7 +512,7 @@ export default function Page() {
               />
             </div>
             <span className="hero-badge-float" data-depth="2.8">
-              1,000+ Hours
+              1,300+ Hours
             </span>
           </div>
         </section>
