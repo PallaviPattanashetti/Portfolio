@@ -370,8 +370,19 @@ export default function Page() {
           .mosaic { grid-template-columns: 1fr; gap: 16px; }
           .g-card { margin-top: 0 !important; height: 240px !important; }
         }
-        @media (max-width: 780px) {
-          .hero-collage { display: none; }
+        /* Keep the hero image visible on every device — never hide it */
+        @media (max-width: 900px) {
+          .hero-collage { flex: 0 0 auto; width: 320px; max-width: 100%; margin: 8px auto 0; }
+        }
+        @media (max-width: 460px) {
+          .hero-collage { height: 340px; width: 280px; }
+          .hero-frame.main { width: 220px; height: 290px; right: 4px; }
+          .hero-blob { width: 210px; height: 210px; top: 50px; left: 16px; }
+          .hero-badge-float { right: 10px; font-size: 0.62rem; padding: 8px 12px; }
+        }
+        @media (max-width: 340px) {
+          .hero-collage { width: 240px; height: 320px; }
+          .hero-frame.main { width: 190px; height: 250px; }
         }
       `}</style>
 
