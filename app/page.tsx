@@ -559,9 +559,6 @@ export default function Page() {
                 alt="Pallavi Pattanashetti"
               />
             </div>
-            <span className="hero-badge-float" data-depth="2.8">
-              1,300+ Hours
-            </span>
           </div>
         </section>
 
