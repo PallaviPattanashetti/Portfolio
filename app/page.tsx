@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Page() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     // Scroll-reveal system
     const els = document.querySelectorAll(".reveal, .book");
@@ -376,15 +378,26 @@ export default function Page() {
           .contact-grid { grid-template-columns: 1fr; }
         }
 
-        /* Navbar — stay on one row, shrink gracefully on phones */
-        .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+        /* Navbar — clean row on desktop, hamburger dropdown on mobile */
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; margin: -8px; color: #1A1A1A; line-height: 0; }
+        .nav-toggle svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
         @media (max-width: 560px) {
-          .nav-links { gap: 16px; }
-          .nav-link { font-size: 0.7rem; letter-spacing: 0.08em; }
-        }
-        @media (max-width: 400px) {
-          .nav-links { gap: 12px; }
-          .nav-link { font-size: 0.64rem; letter-spacing: 0.05em; }
+          .nav-toggle { display: inline-flex; align-items: center; }
+          .nav-links {
+            position: absolute; top: 56px; left: 0; right: 0;
+            flex-direction: column; align-items: stretch; gap: 0;
+            background: rgba(250,250,248,0.98);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E8E5DF;
+            padding: 6px 24px 14px;
+            box-shadow: 0 14px 28px rgba(26,26,26,0.08);
+            transform: translateY(-10px); opacity: 0; pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+          }
+          .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+          .nav-links .nav-link { padding: 14px 2px; font-size: 0.8rem; letter-spacing: 0.1em; border-bottom: 1px solid #EEEBE4; }
+          .nav-links .nav-link:last-child { border-bottom: 0; }
         }
 
         /* Keep the hero image visible on every device — never hide it */
@@ -437,17 +450,36 @@ export default function Page() {
           >
             Pallavi<span style={{ color: "#2563EB" }}>.</span>
           </p>
-          <div className="nav-links" style={{ display: "flex", gap: 28 }}>
-            <a href="#stack" className="nav-link">
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              {menuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              )}
+            </svg>
+          </button>
+          <div className={`nav-links${menuOpen ? " open" : ""}`}>
+            <a href="#stack" className="nav-link" onClick={() => setMenuOpen(false)}>
               Stack
             </a>
-            <a href="#work" className="nav-link">
+            <a href="#work" className="nav-link" onClick={() => setMenuOpen(false)}>
               Projects
             </a>
-            <a href="#experience" className="nav-link">
+            <a
+              href="#experience"
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
               Experience
             </a>
-            <a href="#contact" className="nav-link">
+            <a href="#contact" className="nav-link" onClick={() => setMenuOpen(false)}>
               Contact
             </a>
           </div>
