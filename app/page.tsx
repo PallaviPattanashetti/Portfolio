@@ -333,7 +333,12 @@ export default function Page() {
         .hero-ring { position: absolute; top: 34px; left: 16px; width: 74px; height: 74px; border: 2px dashed rgba(37,99,235,0.55); border-radius: 50%; z-index: 3; animation: spin 18s linear infinite; transform: translate(var(--px,0px), var(--py,0px)); }
         .hero-frame { position: absolute; z-index: 2; border-radius: 18px; overflow: hidden; border: 7px solid #fff; box-shadow: 0 26px 60px rgba(26,26,26,0.22); background: #fff; transform: translate(var(--px,0px), var(--py,0px)) rotate(var(--rot,0deg)); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease; animation: fadeInOnly 0.9s both; }
         .hero-frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.2) contrast(1.04); transition: filter 0.5s ease; }
-        .hero-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(150deg, rgba(37,99,235,0.32), rgba(26,26,26,0.10) 65%); mix-blend-mode: multiply; transition: opacity 0.5s ease; }
+        .hero-frame.main { perspective: 1000px; }
+        .flip-inner { position: absolute; inset: 0; transform-style: preserve-3d; animation: heroFlip 9s ease-in-out infinite; }
+        .flip-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .flip-back { transform: rotateY(180deg); }
+        @keyframes heroFlip { 0%, 42% { transform: rotateY(0deg); } 50%, 92% { transform: rotateY(180deg); } 100% { transform: rotateY(360deg); } }
+        .hero-frame::after { content: ""; position: absolute; inset: 0; z-index: 3; background: linear-gradient(150deg, rgba(37,99,235,0.32), rgba(26,26,26,0.10) 65%); mix-blend-mode: multiply; transition: opacity 0.5s ease; }
         .hero-frame:hover img { filter: grayscale(0) contrast(1.04); }
         .hero-frame:hover::after { opacity: 0; }
         .hero-frame.main { --rot: -3deg; width: 260px; height: 330px; top: 30px; right: 10px; }
@@ -365,7 +370,8 @@ export default function Page() {
           .contact-icon::before { animation: none; opacity: 0.55; }
           .exp-orb { animation: none; }
           .exp-card::before { transition: none; }
-          .hero-text, .hero-frame, .hero-badge-float, .hero-ring { animation: none !important; }
+          .hero-text, .hero-frame, .hero-badge-float, .hero-ring, .flip-inner { animation: none !important; }
+          .flip-back { display: none; }
           .hero-blob, .hero-ring, .hero-frame, .hero-badge-float { transform: rotate(var(--rot,0deg)) !important; }
         }
         @media (max-width: 760px) {
@@ -554,10 +560,18 @@ export default function Page() {
 
           <div className="hero-collage" aria-hidden="true">
             <div className="hero-frame main" data-depth="1.2">
-              <img
-                src="/headshot.jpg"
-                alt="Pallavi Pattanashetti"
-              />
+              <div className="flip-inner">
+                <img
+                  className="flip-face flip-front"
+                  src="/headshot.jpg"
+                  alt="Pallavi Pattanashetti"
+                />
+                <img
+                  className="flip-face flip-back"
+                  src="/sketch.jpg"
+                  alt="Sketch portrait of Pallavi Pattanashetti"
+                />
+              </div>
             </div>
           </div>
         </section>
