@@ -370,6 +370,23 @@ export default function Page() {
           .mosaic { grid-template-columns: 1fr; gap: 16px; }
           .g-card { margin-top: 0 !important; height: 240px !important; }
         }
+        /* Contact grid — responsive, never overflow narrow phones */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+        @media (max-width: 560px) {
+          .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Navbar — stay on one row, shrink gracefully on phones */
+        .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+        @media (max-width: 560px) {
+          .nav-links { gap: 16px; }
+          .nav-link { font-size: 0.7rem; letter-spacing: 0.08em; }
+        }
+        @media (max-width: 400px) {
+          .nav-links { gap: 12px; }
+          .nav-link { font-size: 0.64rem; letter-spacing: 0.05em; }
+        }
+
         /* Keep the hero image visible on every device — never hide it */
         @media (max-width: 900px) {
           .hero-collage { flex: 0 0 auto; width: 320px; max-width: 100%; margin: 8px auto 0; }
@@ -420,7 +437,7 @@ export default function Page() {
           >
             Pallavi<span style={{ color: "#2563EB" }}>.</span>
           </p>
-          <div style={{ display: "flex", gap: 28 }}>
+          <div className="nav-links" style={{ display: "flex", gap: 28 }}>
             <a href="#stack" className="nav-link">
               Stack
             </a>
@@ -849,13 +866,7 @@ export default function Page() {
           >
             Get In Touch
           </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-              gap: 16,
-            }}
-          >
+          <div className="contact-grid">
             {[
               {
                 label: "Email",
