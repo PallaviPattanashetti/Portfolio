@@ -550,18 +550,6 @@ export default function Page() {
               with that same instinct: clean logic, clear interfaces, nothing
               wasted.
             </p>
-            <div
-              style={{
-                display: "flex",
-                gap: 20,
-                alignItems: "center",
-                flexWrap: "wrap" as const,
-              }}
-            >
-              <a href="#work" className="nav-link">
-                See My Work
-              </a>
-            </div>
           </div>
 
           <div className="hero-collage" aria-hidden="true">
