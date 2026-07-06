@@ -138,6 +138,12 @@ export default function Page() {
       desc: "Completed 1,300+ hours of intensive software engineering training in React, Next.js, C#, and .NET, including 300+ hours of internship experience on Stockfolio, CodeStack's internal application, contributing across both the API and client codebases. Also led TimeBank, my full stack capstone, from concept through deployment.",
     },
     {
+      role: "Math Kangaroo Manager",
+      org: "Manteca Learning Center",
+      period: "2023 – 2025",
+      desc: "Opened a learning center welcoming students who wanted to prepare for and attend the international Math Kangaroo exam, coordinating registration and exam-day logistics.",
+    },
+    {
       role: "Substitute Teacher",
       org: "Manteca Unified School District",
       period: "2024 – 2025",
