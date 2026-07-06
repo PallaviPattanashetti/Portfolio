@@ -78,22 +78,10 @@ export default function Page() {
       url: "https://newfrontend-lemon.vercel.app",
     },
     {
-      name: "Pokémon Hub",
-      role: "UI Design and Build",
-      desc: "A fast, data-rich app built around complex state management and live API integration. Every interaction had to feel instant and reliable.",
-      url: "https://pokemangame-h79c-git-main-pallavipattanashettis-projects.vercel.app",
-    },
-    {
       name: "Influence Site",
       role: "UI Design and Build",
       desc: "A clean, responsive site focused on hierarchy and readability. The goal was to let the content breathe while keeping the structure sharp.",
       url: "https://influentialperson.vercel.app",
-    },
-    {
-      name: "All For One",
-      role: "UI Design and Build",
-      desc: "A responsive Next.js web app focused on clean layout, clear hierarchy, and a smooth, accessible user experience across devices.",
-      url: "https://allforonenextjs-ou1m.vercel.app",
     },
   ];
 
@@ -213,12 +201,12 @@ export default function Page() {
         background: "#FAFAF8",
         color: "#1A1A1A",
         minHeight: "100vh",
-        overflowX: "hidden",
       }}
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap');
         * { box-sizing: border-box; }
+        html, body { overflow-x: hidden; }
         html { scroll-behavior: smooth; }
         .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #666; transition: color 0.2s; }
         .nav-link:hover { color: #2563EB; }
