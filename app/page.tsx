@@ -732,7 +732,7 @@ export default function Page() {
                 textDecoration: "none",
               }}
             >
-              All on GitHub
+            
             </a>
           </div>
           <div
