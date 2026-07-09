@@ -975,7 +975,9 @@ export default function Page() {
         <div
           className="reveal scale flash"
           style={{
-            background: "#1A1A1A",
+            backgroundImage: "linear-gradient(150deg, rgba(37, 99, 235, 0.85), rgba(26, 26, 26, 0.92)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             color: "white",
             borderRadius: 14,
             padding: 44,
@@ -1029,7 +1031,7 @@ export default function Page() {
                         fontWeight: 700,
                         letterSpacing: "0.14em",
                         textTransform: "uppercase" as const,
-                        color: "#2563EB",
+                        color: "#93C5FD", // Lighter blue for visibility on dark bg
                         marginBottom: 3,
                       }}
                     >
