@@ -208,8 +208,10 @@ export default function Page() {
         * { box-sizing: border-box; }
         html, body { overflow-x: hidden; }
         html { scroll-behavior: smooth; }
-        .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #666; transition: color 0.2s; }
+        .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #666; transition: color 0.2s; position: relative; padding-bottom: 2px; }
+        .nav-link::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: #2563EB; transform: scaleX(0); transform-origin: right; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
         .nav-link:hover { color: #2563EB; }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
         .btn { display: inline-block; background: #1A1A1A; color: white; padding: 13px 26px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; text-decoration: none; }
         .btn:hover { background: #2563EB; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(37,99,235,0.28); }
 
@@ -254,6 +256,9 @@ export default function Page() {
         .about-stat span { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #999; }
         .about-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
         .about-sign { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-top: 20px; opacity: 0.92; }
+
+        .edu-item:hover { border-left-color: #93C5FD !important; transform: translateX(6px) !important; }
+        .cert-pill:hover { background: #2563EB !important; color: white !important; transform: translateY(-3px) !important; box-shadow: 0 8px 16px rgba(37,99,235,0.25) !important; }
 
         /* Story: storybook page */
         .story-card { border-left: 5px solid #2563EB; background-image: linear-gradient(135deg, rgba(255,253,249,0.93), rgba(246,242,233,0.90)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=900&q=80'); background-size: cover; background-position: center; }
@@ -1024,14 +1029,14 @@ export default function Page() {
                     name: "Kuvempu University, Karnataka, India",
                   },
                 ].map((edu) => (
-                  <div key={edu.label}>
+                  <div key={edu.label} className="edu-item" style={{ paddingLeft: 10, borderLeft: "2px solid transparent", transition: "border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)" }}>
                     <p
                       style={{
                         fontSize: "0.68rem",
                         fontWeight: 700,
                         letterSpacing: "0.14em",
                         textTransform: "uppercase" as const,
-                        color: "#93C5FD", // Lighter blue for visibility on dark bg
+                        color: "#93C5FD", // Vibrant light blue
                         marginBottom: 3,
                       }}
                     >
@@ -1040,7 +1045,7 @@ export default function Page() {
                     <p
                       style={{
                         fontSize: "0.92rem",
-                        color: "rgba(255,255,255,0.85)",
+                        color: "rgba(255,255,255,0.9)",
                         fontWeight: 500,
                       }}
                     >
@@ -1073,13 +1078,16 @@ export default function Page() {
                 {certifications.map((cert) => (
                   <span
                     key={cert}
+                    className="cert-pill"
                     style={{
                       display: "inline-block",
-                      background: "rgba(255,255,255,0.1)",
-                      color: "rgba(255,255,255,0.85)",
+                      background: "rgba(255,255,255,0.12)",
+                      color: "white",
                       fontSize: "0.75rem",
                       padding: "5px 12px",
                       borderRadius: 4,
+                      fontWeight: 500,
+                      transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)"
                     }}
                   >
                     {cert}
